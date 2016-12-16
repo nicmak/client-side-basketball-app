@@ -1,0 +1,7 @@
+.teams {
+  display: flex;
+}
+
+div.team {
+  width: 400;
+}
