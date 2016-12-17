@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import '../styles/App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Navbar from './navbar.jsx'
-import CardExampleWithAvatar from './card.jsx'
+import InventoryBox from './inventorybox.jsx'
+import DivisionCards from './DivisionCard.jsx'
+import TeamCards from './teamcard.jsx'
+
 
 class App extends Component {
 
@@ -17,15 +19,18 @@ class App extends Component {
     })
   }
 
+  onClick = () => {}
+
 
   render() {
     return (
       <MuiThemeProvider>
-      <section className="App">
-        <Navbar/>
-          <CardExampleWithAvatar/>
-      </section>
-    </MuiThemeProvider>
+        <section className="App">
+          <Navbar/>
+          <DivisionCards onClick={this.onClick}/>
+          <TeamCards/>
+        </section>
+      </MuiThemeProvider>
     );
   }
 }
