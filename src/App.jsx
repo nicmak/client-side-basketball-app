@@ -9,6 +9,7 @@ import TeamCards from './teamcard.jsx'
 
 class App extends Component {
 
+
   //I added the constructor for clarity.
   constructor(props) {
 
@@ -49,6 +50,7 @@ class App extends Component {
         console.log(`this are the players from ${team_id}`, json)
       })
   }
+
 
   componentDidMount() {
 
