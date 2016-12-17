@@ -1,7 +1,45 @@
 .teams {
   display: flex;
+
+}
+/*You dont even need to do section.teams,
+smart enough to see .teams */
+/*section.teams {
+}*/
+.team {
+  margin:6px;
+  border-style: outset;
+  border-color: black;
+  border-width: 8px;
+  border-radius: 8px;
+}
+.cardheader {
+  padding-left: 6px;
+  height:30px;
 }
 
-div.team {
-  width: 400;
+.cardmedia:nth-child(2) > div > div  {
+  opacity:0;
+}
+.cardmedia:nth-child(2) > div > div:hover  {
+  opacity:1;
+  transition: opacity 0.5s;
+}
+
+.cardtext {
+  font-size: 10px
+}
+
+.divisions {
+  justify-content: center;
+  display: flex;
+  justify-content: space-around;;
+
+}
+
+.division {
+  width: 229px;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 7px;
 }

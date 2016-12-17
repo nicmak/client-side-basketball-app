@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
-import {AppBar} from 'material-ui';
+import {AppBar, FlatButton} from 'material-ui';
+import InventoryBox from './inventorybox.jsx'
 class Navbar extends Component {
 
   render () {
+
+  //   const buttonStyle = {
+  //   backgroundColor: 'transparent',
+  //   color: 'white'
+  // };
+  //
+  //   const rightButtons = (
+  //     <div>
+  //       <FlatButton label="About" style={buttonStyle}/>
+  //       <FlatButton label="Home" style={buttonStyle}  />
+  //     </div>
+  //   );
+
     return (
-    <div>
-      <AppBar
-        title="Basketball Cards"
-      />
-    </div>
+
+      <AppBar title="Basketball Cards">
+        <InventoryBox/>
+      </AppBar>
+
+
    )}
 }
 export default Navbar;
