@@ -9,30 +9,72 @@ import TeamCards from './teamcard.jsx'
 
 class App extends Component {
 
+  //I added the constructor for clarity.
+  constructor(props) {
+
+    const data = {
+      teams: [],
+      teamPlayers: [],
+    }
+    super(props)
+
+    this.state = data;
+  }
+
+  //This function fetches all the teams when called and appends them in the
+  //state.teams
+  getTeams = () => {
+    fetch(`http://www.localhost:8080/teams`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((teams_json) => {
+        //parse the received teams and push into teams array in stat.
+        //There might be a more efficient to do this.
+        console.log(`this are all the teams`, teams_json)
+        const teams = this.state.teams
+        teams.push(teams_json)
+        this.setState({teams})
+      })
+  }
+
+  //This function fetches the players from a given team.
+  //Takes a the team id as an argument.
+  getPlayersFromTeam = (team_id) => {
+    fetch(`http://www.localhost:8080/teams/${team_id}/players`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        console.log(`this are the players from ${team_id}`, json)
+      })
+  }
+
   componentDidMount() {
-   fetch('http://www.localhost:8080/')
-    .then((response) => {
-      return response.text();
-    })
-    .then((body) => {
-      console.log(body)
-    })
+
+    //This imports the teams and puts them in the state.teams.
+    this.getTeams()
+
+    //This should be called when you click on one of the teams
+    //so not on componentDidMount. I only put it here to test.
+    //Also, the team_id should also not be hard coded as I do here.
+    this.getPlayersFromTeam(1)
   }
 
-  onClick = () => {}
+    // onClick = () => {}
 
 
-  render() {
-    return (
-      <MuiThemeProvider>
-        <section className="App">
-          <Navbar/>
-          <DivisionCards onClick={this.onClick}/>
-          <TeamCards/>
-        </section>
-      </MuiThemeProvider>
-    );
+    render() {
+      return (
+        <MuiThemeProvider>
+          <section className="App">
+            <Navbar/>
+            <DivisionCards onClick={this.onClick}/>
+            <TeamCards/>
+          </section>
+        </MuiThemeProvider>
+      );
+    }
   }
-}
 
 export default App;
