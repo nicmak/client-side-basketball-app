@@ -10,7 +10,7 @@ export default class DivisionCards extends Component {
 
 handleDivClick = (e) => {
   this.props.dope;
-  console.log('I got clicked on DivisionCard')
+  console.log('I got clicked on DivisionCard Nic2')
   e.preventDefault();
 }
 
