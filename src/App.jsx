@@ -6,8 +6,18 @@ import InventoryBox from './inventorybox.jsx'
 import DivisionCards from './DivisionCard.jsx'
 import TeamCards from './teamcard.jsx'
 
-
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      teamCards: false
+    };
+  }
+
+  onClick = () => {
+    console.log("App felt something")
+    // this.setState({teamCards:true})
+  }
 
   componentDidMount() {
    fetch('http://www.localhost:8080/')
@@ -18,17 +28,14 @@ class App extends Component {
       console.log(body)
     })
   }
-
-  onClick = () => {}
-
-
   render() {
     return (
       <MuiThemeProvider>
         <section className="App">
           <Navbar/>
-          <DivisionCards onClick={this.onClick}/>
-          <TeamCards/>
+          <DivisionCards dope={this.onClick}/>
+          {/* Click is not firing from handDivClick */}
+          <TeamCards teamCardsTog={this.state.teamCards}/>
         </section>
       </MuiThemeProvider>
     );

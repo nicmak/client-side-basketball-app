@@ -7,7 +7,7 @@ render () {
   return (
 <section className="teams">
   <div className="team">
-    <Card expandable>
+    <Card expandable={this.teamCardsTog}>
       <div className="cardheader">
         RAPTORS
       </div>
