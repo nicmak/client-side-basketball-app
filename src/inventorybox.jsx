@@ -1,6 +1,7 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
+
 import {FlatButton, RaisedButton} from 'material-ui';
 
 export default class DrawerOpenRightExample extends React.Component {
@@ -13,7 +14,7 @@ export default class DrawerOpenRightExample extends React.Component {
   handleToggle = () => this.setState({open: !this.state.open});
 
   render() {
-    console.log(this.state.open)
+    // console.log(this.state.open)
     return (
       <div>
         <RaisedButton

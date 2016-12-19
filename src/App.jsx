@@ -5,6 +5,10 @@ import Navbar from './navbar.jsx'
 import InventoryBox from './inventorybox.jsx'
 import DivisionCards from './DivisionCard.jsx'
 import TeamCards from './teamcard.jsx'
+import playerCards from './playercards.jsx'
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 class App extends Component {
   constructor(props) {
@@ -16,26 +20,35 @@ class App extends Component {
 
   onClick = () => {
     console.log("App felt something")
-    // this.setState({teamCards:true})
+    this.setState({teamCards: !this.state.teamCards})
   }
 
-  componentDidMount() {
-   fetch('http://www.localhost:8080/')
-    .then((response) => {
-      return response.text();
-    })
-    .then((body) => {
-      console.log(body)
-    })
+  playerShow =() => {
+    console.log("Player button clicked");
   }
+
+  // componentDidMount() {
+  //  fetch('http://www.localhost:8080/')
+  //   .then((response) => {
+  //     return response.text();
+  //   })
+  //   .then((body) => {
+  //     console.log(body)
+  //   })
+  // }
   render() {
+    console.log(this.state.teamCards);
     return (
       <MuiThemeProvider>
         <section className="App">
           <Navbar/>
-          <DivisionCards dope={this.onClick}/>
-          {/* Click is not firing from handDivClick */}
-          <TeamCards teamCardsTog={this.state.teamCards}/>
+          <DivisionCards teamAppear={this.onClick}/>
+          {
+            this.state.teamCards
+              ? <TeamCards playerShow={this.playerShow}/>
+              : null
+          }
+          <playerCards></playerCards>
         </section>
       </MuiThemeProvider>
     );

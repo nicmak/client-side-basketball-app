@@ -7,6 +7,8 @@ import '../styles/card.css';
 import Slider from 'react-image-slider';
 
 class TeamCards extends Component {
+
+
 render () {
   const teams = [
     {
@@ -43,7 +45,7 @@ render () {
   return (
     <Slider>
       {teams.map((team,key) =>
-        <Card key={key}>
+        <Card key={key} onClick={this.props.playerShow}>
           <img className="logo" src={team.logo}/>
           <img role="presentation" src={team.locationImg}/>
           <CardMedia className ="cardmedia" overlay={<CardTitle title ={team.title}/>}>
