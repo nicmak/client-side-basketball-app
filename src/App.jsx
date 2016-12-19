@@ -41,7 +41,9 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <section className="App">
-          <Navbar/>
+          <Navbar
+            style={{backgroundColor:"red"}}
+          />
           <DivisionCards teamAppear={this.onClick}/>
           {
             this.state.teamCards

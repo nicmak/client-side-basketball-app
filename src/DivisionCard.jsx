@@ -4,7 +4,7 @@ import {Card, CardMedia} from 'material-ui/Card';
 import '../styles/card.css'
 
 export default class DivisionCards extends Component {
-  
+
   render(){
     return (
       <section className="divisions">
@@ -15,7 +15,7 @@ export default class DivisionCards extends Component {
             </CardMedia>
           </Card>
         </div>
-        <div className="division">
+        <div className="division" onClick={this.props.teamAppear}>
           <Card>
             <CardMedia>
               <img role="presentation" src="https://upload.wikimedia.org/wikipedia/en/e/ed/Eastern_Conference_(NBA)_logo.gif"/>

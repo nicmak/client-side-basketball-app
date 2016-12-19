@@ -3,6 +3,12 @@
   position: relative;
   width: 100%;
   margin: 0 auto;
+  animation-name: teamSlider;
+  animation-duration: 2s;
+}
+@keyframes teamSlider {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 .rsc-slider {
   display: -webkit-flex;

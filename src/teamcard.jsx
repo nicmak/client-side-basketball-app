@@ -43,6 +43,7 @@ render () {
     }
   ]
   return (
+
     <Slider>
       {teams.map((team,key) =>
         <Card key={key} onClick={this.props.playerShow}>
