@@ -7,6 +7,8 @@ import DivisionCards from './DivisionCard.jsx'
 import TeamCards from './teamcard.jsx'
 import playerCards from './playercards.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 injectTapEventPlugin();
 
@@ -39,7 +41,7 @@ class App extends Component {
   render() {
     console.log(this.state.teamCards);
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
           <Navbar
             style={{backgroundColor:"red"}}
@@ -50,7 +52,7 @@ class App extends Component {
               ? <TeamCards playerShow={this.playerShow}/>
               : null
           }
-          <playerCards></playerCards>
+          <playerCards/>
         </section>
       </MuiThemeProvider>
     );

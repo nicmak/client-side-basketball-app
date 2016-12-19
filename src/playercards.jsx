@@ -4,6 +4,9 @@ import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import '../styles/card.css';
 
+class playerCards extends Component {
+
+    render() {
 const styles = {
   root: {
     display: 'flex',
@@ -19,7 +22,6 @@ const styles = {
     color: 'rgb(0, 188, 212)',
   },
 };
-
 const playerData = [
   {
     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/201942.png",
@@ -42,27 +44,11 @@ const playerData = [
     team:"Raptors"
   },
 ]
-
-class playerCards extends Component {
-  render() {
     return (
-      <div style={styles.root}>
-    <GridList style={styles.gridList} cols={2.2}>
-      {playerData.map((player) => (
-        <GridTile
-          key={player.headShot}
-          title={player.name}
-          actionIcon={<IconButton><StarBorder color="rgb(0, 188, 212)" /></IconButton>}
-          titleStyle={styles.titleStyle}
-          titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-        >
-          <img role="presentation" src={player.headShot} />
-        </GridTile>
-      ))}
-    </GridList>
-  </div>
+
+      "Hello World"
+
     );
   }
 }
-
 export default playerCards;
