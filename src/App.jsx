@@ -5,7 +5,7 @@ import Navbar from './navbar.jsx'
 import InventoryBox from './inventorybox.jsx'
 import DivisionCards from './DivisionCard.jsx'
 import TeamCards from './teamcard.jsx'
-import playerCards from './playercards.jsx'
+import PlayerCards from './playercards.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -52,7 +52,7 @@ class App extends Component {
               ? <TeamCards playerShow={this.playerShow}/>
               : null
           }
-          <playerCards/>
+          <PlayerCards/>
         </section>
       </MuiThemeProvider>
     );
