@@ -20,6 +20,7 @@ class Navbar extends Component {
     return (
 
       <AppBar title="Basketball Cards">
+    
         <InventoryBox/>
       </AppBar>
 

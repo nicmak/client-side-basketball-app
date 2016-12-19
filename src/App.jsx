@@ -5,23 +5,24 @@ import Navbar from './navbar.jsx'
 import InventoryBox from './inventorybox.jsx'
 import DivisionCards from './DivisionCard.jsx'
 import TeamCards from './teamcard.jsx'
+import PlayerCards from './playercards.jsx'
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+injectTapEventPlugin();
 
 class App extends Component {
-
-
   //I added the constructor for clarity.
+
   constructor(props) {
-
-    const data = {
+    super(props);
+    this.state = {
+      teamCards: false,
       teams: [],
-      teamPlayers: [],
-    }
-    super(props)
-
-    this.state = data;
+      teamPlayers: []
+    };
   }
-
   //This function fetches all the teams when called and appends them in the
   //state.teams
   getTeams = () => {
@@ -38,7 +39,6 @@ class App extends Component {
         this.setState({teams})
       })
   }
-
   //This function fetches the players from a given team.
   //Takes a the team id as an argument.
   getPlayersFromTeam = (team_id) => {
@@ -51,9 +51,7 @@ class App extends Component {
       })
   }
 
-
   componentDidMount() {
-
     //This imports the teams and puts them in the state.teams.
     this.getTeams()
 
@@ -63,20 +61,41 @@ class App extends Component {
     this.getPlayersFromTeam(1)
   }
 
-    // onClick = () => {}
-
-
-    render() {
-      return (
-        <MuiThemeProvider>
-          <section className="App">
-            <Navbar/>
-            <DivisionCards onClick={this.onClick}/>
-            <TeamCards/>
-          </section>
-        </MuiThemeProvider>
-      );
-    }
+  onClick = () => {
+    console.log("App felt something")
+    this.setState({teamCards: !this.state.teamCards})
   }
+  playerShow =() => {
+    console.log("Player button clicked");
+  }
+  // componentDidMount() {
+  //  fetch('http://www.localhost:8080/')
+  //   .then((response) => {
+  //     return response.text();
+  //   })
+  //   .then((body) => {
+  //     console.log(body)
+  //   })
+  // }
+  render() {
+    console.log(this.state.teamCards);
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <section className="App">
+          <Navbar
+            style={{backgroundColor:"red"}}
+          />
+          <DivisionCards teamAppear={this.onClick}/>
+          {
+            this.state.teamCards
+              ? <TeamCards playerShow={this.playerShow}/>
+              : null
+          }
+          <PlayerCards/>
+        </section>
+      </MuiThemeProvider>
+    );
 
+  }
+}
 export default App;

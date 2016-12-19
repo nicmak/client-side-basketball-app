@@ -13,6 +13,12 @@ smart enough to see .teams */
   border-width: 8px;
   border-radius: 8px;
 }
+
+.logo {
+  position: absolute;
+  width:8%;
+
+}
 .cardheader {
   padding-left: 6px;
   height:30px;
@@ -25,6 +31,8 @@ smart enough to see .teams */
   opacity:1;
   transition: opacity 0.5s;
 }
+
+
 
 .cardtext {
   font-size: 10px
