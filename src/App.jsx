@@ -14,7 +14,7 @@ const playerData = [
   {
     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/201942.png",
     name:"DeMar DeRozan",
-    team:"Lakers"
+    team:"Raptors"
   },
   {
     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/200768.png",
@@ -24,22 +24,22 @@ const playerData = [
   {
     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/202685.png",
     name:"Jonas Valanciunas",
-    team:"Raptors"
+    team:"Chicago Bulls"
   },
   {
     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
     name:"Lucas Nogueira",
-    team:"Raptors"
-  },
-  {
-    headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
-    name:"Lucas Nogueira",
-    team:"Knicks"
+    team:"Cavaliers"
   },
   {
     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
     name:"Lucas Nogueira",
     team:"Knicks"
+  },
+  {
+    headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
+    name:"Lucas Nogueira",
+    team:"Golden State"
   },
   {
     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
@@ -52,49 +52,43 @@ const teams = [
   {
     locationImg:"https://images.trvl-media.com/hotels/15000000/14770000/14762000/14761971/14761971_1_z.jpg",
     logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/tor.png",
-    title:"Toronto",
-    Conference:"Eastern"
-  },
-  {
-    locationImg:"https://images.trvl-media.com/hotels/15000000/14770000/14762000/14761971/14761971_1_z.jpg",
-    logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/tor.png",
-    title:"Toronto",
-    Conference:"Eastern"
-  },
-  {
-    locationImg:"https://images.trvl-media.com/hotels/15000000/14770000/14762000/14761971/14761971_1_z.jpg",
-    logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/tor.png",
-    title:"Toronto",
+    title:"Raptors",
+    location:"Toronto",
     Conference:"Eastern"
   },
   {
     locationImg:"http://www.quinceanera.com/wp-content/uploads/2015/03/griffith-observatory-at-night-los-feliz-los-angeles.jpg",
     logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/lal.png",
-    title:"Los Angeles",
+    title:"Lakers",
+    location:"Los Angeles",
     Conference:"Western"
   },
   {
     locationImg:"http://static.panoramio.com/photos/large/14958187.jpg",
     logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/chi.png",
-    title:"Chicago",
+    title:"Chicago Bulls",
+    location:"Chicago",
     Conference:"Eastern"
   },
   {
     locationImg:"http://static.panoramio.com/photos/large/47344885.jpg",
     logo:"http://a4.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fnba%2F500%2Fcle.png",
-    title:"Cleveland",
+    title:"Cavaliers",
+    location:"Cleveland",
     Conference:"Eastern"
   },
   {
     locationImg:"http://traveldigg.com/wp-content/uploads/2016/05/Times-Square-New-York-City-At-Night.jpg",
     logo:"http://4.bp.blogspot.com/-rukBOVnZI4w/UT4iMqZnjqI/AAAAAAAAfmg/ZOVIrHf1NRA/s1600/New+York+Knicks+Club+Logo+2013+04.png",
-    title:"New York",
+    title:"Knicks",
+    location:"New York",
     Conference:"Eastern"
   },
   {
     locationImg:"https://w-dog.net/wallpapers/0/53/337092311092055/night-town-bridge-from-san-francisco-to-oakland-san-francisco-united-states-california.jpg",
     logo:"https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/838px-Golden_State_Warriors_logo.svg.png",
     title:"Golden State",
+    location:"California",
     Conference:"Western"
   }
 ]
@@ -104,12 +98,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamCards: false,
+      teamCardsAppear: false,
+      playerCardsAppear: false,
       Conference:"",
       teams: teams,
-      teamName:"",
-      teamPlayers: playerData
+      teamPlayers: playerData,
+      selectedTeam:null
     };
+  //  this
+    //this.selectTeam = this.selectTeam.bind(this)
+  }
+  selectTeam = (name) => {
+    console.log("LOOK HERE",name);
+    this.setState(
+      {
+        selectedTeam: name,
+        playerCardsAppear: !this.state.playerCardsAppear
+      }
+    )
+
   }
   // This function fetches all the teams when called and appends them in the
   // state.teams
@@ -153,7 +160,7 @@ class App extends Component {
     console.log("App felt something")
     this.setState(
       {
-        teamCards: !this.state.teamCards,
+        teamCardsAppear: !this.state.teamCardsAppear,
         Conference: "Western"
       })
   }
@@ -161,7 +168,7 @@ class App extends Component {
     console.log("App felt something")
     this.setState(
       {
-        teamCards: !this.state.teamCards,
+        teamCardsAppear: !this.state.teamCardsAppear,
         Conference: "Eastern"
       })
   }
@@ -182,17 +189,19 @@ class App extends Component {
   //   })
   // }
   render() {
-    console.log(this.state.teamCards);
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
           <Navbar/>
           <DivisionCards onWestern={this.onWestern} onEastern={this.onEastern}/>
           {
-            this.state.teamCards ? <TeamCards teams={this.state.teams} playerShow={this.playerShow} conferenceValue={this.state.Conference}/>
+            this.state.teamCardsAppear ? <TeamCards selectTeam={this.selectTeam} teams={this.state.teams} playerShow={this.playerShow} conferenceValue={this.state.Conference}/>
             : null
           }
-          <PlayerCards playerData={this.state.teamPlayers}/>
+          {
+            this.state.playerCardsAppear ? <PlayerCards teamName={this.state.selectedTeam} playerData={this.state.teamPlayers}/>
+            : null
+          }
         </section>
       </MuiThemeProvider>
     );

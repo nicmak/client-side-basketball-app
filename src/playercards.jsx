@@ -6,25 +6,24 @@ import '../styles/card.css';
 
 class playerCards extends Component {
 
-constructor(props) {
-  super(props);
-  this.state
-}
-
-checkTeams = (teamObject) => {
-  return teamObject.team === "Raptors"
-}
-    render() {
-    return (
-      <Slider>
-        {this.props.playerData.filter(this.checkTeams).map((player,key) =>
-          <Card key={key} onClick={this.props.playerShow}>
-            <img role="presentation" src={player.headShot}/>
-            <CardMedia className ="cardmedia" overlay={<CardTitle title ={player.name}/>}>
-            </CardMedia>
-          </Card>)}
-      </Slider>
-    );
+  constructor(props) {
+    super(props);
+    this.state
   }
+  checkTeams = (teamObject) => {
+    return teamObject.team === this.props.teamName
+  }
+    render() {
+      return (
+        <Slider>
+          {this.props.playerData.filter(this.checkTeams).map((player,key) =>
+            <Card key={key} onClick={this.props.playerShow}>
+              <img role="presentation" src={player.headShot}/>
+              <CardMedia className ="cardmedia" overlay={<CardTitle title ={player.name}/>}>
+              </CardMedia>
+            </Card>)}
+        </Slider>
+      );
+    }
 }
 export default playerCards;
