@@ -108,15 +108,14 @@ class App extends Component {
   //  this
     //this.selectTeam = this.selectTeam.bind(this)
   }
-  selectTeam = (name) => {
-    console.log("LOOK HERE",name);
+  selectTeam = (team_id) => {
+    console.log("LOOK HERE",team_id);
     this.setState(
       {
-        selectedTeam: name,
+        selectedTeam: team_id,
         playerCardsAppear: !this.state.playerCardsAppear
       }
     )
-
   }
   // This function fetches all the teams when called and appends them in the
   // state.teams
@@ -129,22 +128,21 @@ class App extends Component {
   //       //parse the received teams and push into teams array in stat.
   //       //There might be a more efficient to do this.
   //       console.log(`this are all the teams`, teams_json)
-  //       const teams = this.state.teams
-  //       teams.push(teams_json)
-  //       this.setState({teams})
+  //       this.setState({teams:teams})
   //     })
   // }
-  //This function fetches the players from a given team.
-  //Takes a the team id as an argument.
-  // getPlayersFromTeam = (team_id) => {
-  //   fetch(`http://www.localhost:8080/teams/${team_id}/players`)
-  //     .then((response) => {
-  //       return response.json()
-  //     })
-  //     .then((json) => {
-  //       console.log(`this are the players from ${team_id}`, json)
-  //     })
-  // }
+  // This function fetches the players from a given team.
+  // Takes a the team id as an argument.
+ // getPlayersFromTeam = (team_id) => {
+ //    fetch(`http://www.localhost:8080/teams/${team_id}/players`)
+ //      .then((response) => {
+ //        return response.json()
+ //      })
+ //      .then((player_json) => {
+ //        console.log(`this are the players from ${team_id}`,player_json)
+ //        this.setState({teamPlayers:player_json})
+ //      })
+ //  }
 
   // componentDidMount() {
   //   //This imports the teams and puts them in the state.teams.
@@ -154,6 +152,7 @@ class App extends Component {
   //   //so not on componentDidMount. I only put it here to test.
   //   //Also, the team_id should also not be hard coded as I do here.
   //   // this.getPlayersFromTeam(1)
+       //
   // }
 //--------------------------------------------------------------------
   onWestern = () => {
@@ -199,7 +198,7 @@ class App extends Component {
             : null
           }
           {
-            this.state.playerCardsAppear ? <PlayerCards teamName={this.state.selectedTeam} playerData={this.state.teamPlayers}/>
+            this.state.playerCardsAppear ? <PlayerCards teamID={this.state.selectedTeam} playerData={this.state.teamPlayers}/>
             : null
           }
         </section>

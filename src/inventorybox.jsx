@@ -22,23 +22,23 @@ export default class DrawerOpenRightExample extends React.Component {
       {
         headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/201942.png",
         name:"DeMar DeRozan",
-        team:"Raptors"
-      },
-      {
-        headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/200768.png",
-        name:"Kyle Lowry",
-        team:"Raptors"
-      },
-      {
-        headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/202685.png",
-        name:"Jonas Valanciunas",
-        team:"Raptors"
-      },
-      {
-        headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
-        name:"Lucas Nogueira",
-        team:"Raptors"
-      },
+        team:"Raptors" }
+      // },
+      // {
+      //   headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/200768.png",
+      //   name:"Kyle Lowry",
+      //   team:"Raptors"
+      // },
+      // {
+      //   headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/202685.png",
+      //   name:"Jonas Valanciunas",
+      //   team:"Raptors"
+      // },
+      // {
+      //   headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
+      //   name:"Lucas Nogueira",
+      //   team:"Raptors"
+      // },
     ]
 
     const style = {
@@ -65,9 +65,8 @@ export default class DrawerOpenRightExample extends React.Component {
               disabled={true}
               leftAvatar=
               {
-              <Paper style={style} zDepth={3} circle={true}>
-
-                <Avatar src={player.headShot}/>
+              <Paper style={style} zDepth={3} circle={true} size={40}>
+                <img src="http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png"/>
               </Paper>
               }
             >

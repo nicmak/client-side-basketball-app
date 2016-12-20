@@ -11,7 +11,8 @@ class playerCards extends Component {
     this.state
   }
   checkTeams = (teamObject) => {
-    return teamObject.team === this.props.teamName
+    //replace with teamObject.team_id 
+    return teamObject.team === this.props.teamID
   }
     render() {
       return (

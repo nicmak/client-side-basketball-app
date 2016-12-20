@@ -16,6 +16,7 @@ export default class TeamCards extends Component {
   render () {
     const cards = this.props.teams.filter(this.checkDivision).map((team, key) => {
       return (
+        // once we get data flowing in, replace use this.props.getPlayersFromTeam(team.id)
         <Card key={key} onClick={() => { this.props.selectTeam(team.title) }} >
           <img className="logo" src={team.logo}/>
           <img role="presentation" src={team.locationImg}/>
