@@ -1,3 +1,16 @@
 .InventoryButton {
   background-color: black;
 }
+
+.Background > div {
+  background-color: brown !important;
+}
+
+div.Background > div > div {
+  background-color: sienna !important;
+}
+
+.playerImg {
+  width: 137px;
+  height: 115px;
+}

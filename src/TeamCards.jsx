@@ -1,26 +1,29 @@
 import React, {Component} from 'react';
-import {Card, CardMedia,CardTitle, CardActions, FlatButton} from 'material-ui/Card';
+import {Card, CardMedia,CardTitle, CardActions} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+
 import Slider from 'react-image-slider';
 import '../styles/card.css';
 import '../styles/image-slider.css';
 
 export default class TeamCards extends Component {
-  constructor(props) {
-    super(props);
-    this.state
-  }
+
   checkDivision = (teamObject) => {
-    console.log('12', teamObject.Conference);
-    return teamObject.Conference === this.props.conferenceValue
+    console.log('12', teamObject.division);
+    return teamObject.division === this.props.conferenceValue
   }
   render () {
-    const cards = this.props.teams.filter(this.checkDivision).map((team, key) => {
+    const cards = this.props.teams.filter(this.checkDivision).map((team) => {
       return (
         // once we get data flowing in, replace use this.props.getPlayersFromTeam(team.id)
-        <Card key={key} onClick={() => { this.props.selectTeam(team.title) }} >
+        <Card key={team.id} onClick={() => { this.props.getPlayersFromTeam(team.id) }} >
           <img className="logo" src={team.logo}/>
-          <img role="presentation" src={team.locationImg}/>
+          <img role="presentation" src={team.background}/>
           <CardMedia className ="cardmedia" overlay={<CardTitle title={team.location}/>}/>
+          <CardActions>
+            {/* <FlatButton label="Add"/> */}
+            <FlatButton href={team.website} label="Website"/>
+          </CardActions>
         </Card>
       );
     });

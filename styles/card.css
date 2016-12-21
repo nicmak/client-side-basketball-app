@@ -2,10 +2,6 @@
   display: flex;
 
 }
-/*You dont even need to do section.teams,
-smart enough to see .teams */
-/*section.teams {
-}*/
 .team {
   margin:6px;
   border-style: outset;
@@ -24,14 +20,29 @@ smart enough to see .teams */
   height:30px;
 }
 
+div.cardmedia2 > div > div > div  {
+  opacity:0;
+
+}
+div.cardmedia2 > div > div > div:hover  {
+  opacity:1;
+  transition: opacity 0.5s;
+  bottom:2px !important;
+}
+
 div.cardmedia > div > div > div  {
   opacity:0;
+
+
 }
 div.cardmedia > div > div > div:hover  {
   opacity:1;
   transition: opacity 0.5s;
 }
 
+div.cardmedia > div > button {
+  z-index: 1000;
+}
 
 
 .cardtext {

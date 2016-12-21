@@ -1,27 +1,20 @@
 import React, {Component} from 'react';
-import {Card, CardMedia,CardTitle, CardActions, FlatButton} from 'material-ui/Card';
+import {Card, CardMedia,CardTitle, CardActions} from 'material-ui/Card';
 import Slider from 'react-image-slider';
+import FlatButton from 'material-ui/FlatButton';
 import '../styles/image-slider.css';
 import '../styles/card.css';
 
 class playerCards extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state
-  }
-  checkTeams = (teamObject) => {
-    //replace with teamObject.team_id 
-    return teamObject.team === this.props.teamID
-  }
     render() {
       return (
         <Slider>
-          {this.props.playerData.filter(this.checkTeams).map((player,key) =>
+          {this.props.playerData.map((player,key) =>
             <Card key={key} onClick={this.props.playerShow}>
-              <img role="presentation" src={player.headShot}/>
-              <CardMedia className ="cardmedia" overlay={<CardTitle title ={player.name}/>}>
-              </CardMedia>
+              <img role="presentation" src={player.head_shot}/>
+              <CardMedia className ="cardmedia2" overlay={<CardTitle title ={`${player.first_name} ${player.last_name}`}/>}/>
+                <FlatButton onClick={this.props.addPlayer(player.id)} className="FlatButton" label="Add"/>
+
             </Card>)}
         </Slider>
       );

@@ -25,3 +25,20 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.Nav {
+  height: 100px;
+  background-color: brown;
+  border-bottom-style: solid;
+  border-bottom-width: 9px;
+  margin-bottom: 23px;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.Nav > div > div {
+    float: right;
+    height: 40px;
+    margin-right: 15px;
+    margin-top: 12px;
+}

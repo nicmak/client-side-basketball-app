@@ -5,6 +5,7 @@ import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
+import '../styles/Inventorybox.css';
 
 import {FlatButton, RaisedButton} from 'material-ui';
 
@@ -54,19 +55,18 @@ export default class DrawerOpenRightExample extends React.Component {
           onClick={this.handleToggle}
           label="Inventory"
         />
-        <Drawer width={400} openSecondary={true} open={this.state.open} >
+        <Drawer className="Background"  width={400} openSecondary={true} open={this.state.open} >
           <AppBar title="User's Inventory">
               <FlatButton onClick={this.handleToggle} label="Close"/>
           </AppBar>
           <List>
             {playerData.map((player) => (
-
             <ListItem
               disabled={true}
               leftAvatar=
               {
-              <Paper style={style} zDepth={3} circle={true} size={40}>
-                <img src="http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png"/>
+              <Paper style={style} zDepth={3} size={40}>
+                <img className="playerImg" src="http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png"/>
               </Paper>
               }
             >
