@@ -142,6 +142,26 @@ class App extends Component {
       })
   }
 
+  getPlayerInfo = (player_id) => {
+    fetch(`http://www.localhost:8080/players/${player_id}`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((player_json) => {
+        console.log(`this is the player bio object:`, player_json)
+      })
+    }
+
+  getPlayerBoxscores = (player_id) => {
+    fetch(`http://www.localhost:8080/players/${player_id}/boxscores`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((playerBoxscore_json) => {
+        console.log(`this is the player boxscores:`, player_json)
+      })
+    }
+
   componentDidMount() {
     //This imports the teams and puts them in the state.teams.
     this.getTeams()
