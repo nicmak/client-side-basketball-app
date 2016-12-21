@@ -62,3 +62,35 @@ div.cardmedia > div > button {
   border-width: 5px;
   border-radius: 7px;
 }
+.tabs > div {
+  width: 107% !important;
+  display: flex;
+  position: relative;
+  right: 24px;
+}
+
+.Biology > Img {
+  height: 135px;
+  border-style: solid;
+  border-radius: 2px;
+  border-color: black;
+  border-width: 6px;
+  position: relative;
+ }
+.playerInfo {
+  border-style: solid;
+  border-radius: 2px;
+  border-color: black;
+  border-width: 6px;
+  padding: 7px;
+  width: 515px;
+  position: relative;
+  left: 192px;
+  bottom: 151px;
+  font-size: 16px;
+  height: 11px;
+  }
+
+  .views > div > div > div > div {
+    padding: 0px 0px 125px;
+  }
