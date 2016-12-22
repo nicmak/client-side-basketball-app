@@ -210,13 +210,26 @@ class App extends Component {
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
           <Navbar/>
-          <DivisionCards onWestern={this.onWestern} onEastern={this.onEastern}/>
+            <DivisionCards
+              onWestern={this.onWestern}
+              onEastern={this.onEastern}
+            />
           {
-            this.state.teamCardsAppear ? <TeamCards getPlayersFromTeam={this.getPlayersFromTeam} teams={this.state.teams} playerShow={this.playerShow} conferenceValue={this.state.Conference}/>
+            this.state.teamCardsAppear ?
+              <TeamCards
+                getPlayersFromTeam={this.getPlayersFromTeam}
+                teams={this.state.teams}
+                playerShow={this.playerShow}
+                conferenceValue={this.state.Conference}
+              />
             : null
           }
           {
-            this.state.playerCardsAppear ? <PlayerCards addPlayer={this.playerAdd} playersData={this.state.teamPlayers}/>
+            this.state.playerCardsAppear ?
+              <PlayerCards
+                addPlayer={this.playerAdd}
+                playersData={this.state.teamPlayers}
+              />
             : null
           }
         </section>

@@ -4,7 +4,7 @@ import {Card, CardMedia,CardTitle} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import '../styles/card.css';
+import '../../styles/card.css';
 
 export default class OneCard extends Component {
   constructor(props) {
@@ -26,10 +26,11 @@ export default class OneCard extends Component {
   };
 
   render() {
-  const player = this.props.player;
-  const key = this.props.key;
-    return (
+    const player = this.props.player;
+    debugger;
+    const key = this.props.key
 
+    return (
         <Card key={key}>
           <img role="presentation" src={player.head_shot}/>
           <CardMedia className ="cardmedia2" overlay={<CardTitle title ={`${player.first_name} ${player.last_name}`}/>}/>
@@ -58,9 +59,9 @@ export default class OneCard extends Component {
                     <img src={player.head_shot}/>
                     <div className="playerInfo">
                       Name: {`${player.first_name} ${player.last_name}`}<br/><br/>
-                      College: {player.college}<br/><br/>
-                      Height: {player.height}<br/><br/>
-                      Weight: {player.weight}
+                      {/* College: {player.college}<br/><br/> */}
+                      {/* Height: {player.height}<br/><br/> */}
+                      {/* Weight: {player.weight} */}
                     </div>
                     <table>
                       <tr>
