@@ -226,8 +226,8 @@ class App extends Component {
           }
           {
             this.state.playerCardsAppear ?
+            // console.log("Hello")
               <PlayerCards
-                addPlayer={this.playerAdd}
                 playersData={this.state.teamPlayers}
               />
             : null

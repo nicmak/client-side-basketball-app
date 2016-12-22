@@ -7,13 +7,15 @@ class PlayerCards extends Component {
   render() {
     return (
       <Slider>
-        {this.props.playersData.map((player, key) => {
-          
-          <OneCard
-            player={this.player}
-            key={this.key}
-          />
-        })}
+        {
+          this.props.playersData.map((player, key) => {
+            //  console.log(player)
+            <OneCard
+              player={this.player}
+              key={this.key}
+            />
+          })
+        }
       </Slider>
     );
   }
