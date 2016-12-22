@@ -9,6 +9,6 @@ const root = document.getElementById('root')
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}/>
-    <Route path="/InventoryPage/:id" component={InventoryPage}/>
+    {/* <Route path="/InventoryPage/:id" component={InventoryPage}/> */}
   </Router>
   ,root);

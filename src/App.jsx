@@ -136,7 +136,6 @@ class App extends Component {
             teamPlayers:player_json,
             // selectedTeam: team_id,
             playerCardsAppear: !this.state.playerCardsAppear
-
           }
         )
       })
@@ -158,7 +157,7 @@ class App extends Component {
         return response.json()
       })
       .then((playerBoxscore_json) => {
-        console.log(`this is the player boxscores:`, player_json)
+        console.log(`this is the player boxscores:`, playerBoxscore_json)
       })
     }
 
@@ -212,11 +211,11 @@ class App extends Component {
           <Navbar/>
           <DivisionCards onWestern={this.onWestern} onEastern={this.onEastern}/>
           {
-            this.state.teamCardsAppear ? <TeamCards getPlayersFromTeam={this.getPlayersFromTeam} teams={this.state.teams} playerShow={this.playerShow} conferenceValue={this.state.Conference}/>
+            this.state.teamCardsAppear ? <TeamCards getPlayersFromTeam={this.getPlayersFromTeam} teams={this.state.teams}  conferenceValue={this.state.Conference}/>
             : null
           }
           {
-            this.state.playerCardsAppear ? <PlayerCards addPlayer={this.playerAdd} playerData={this.state.teamPlayers}/>
+            this.state.playerCardsAppear ? <PlayerCards playerShow={this.playerShow} addPlayer={this.playerAdd} playerData={this.state.teamPlayers}/>
             : null
           }
         </section>
