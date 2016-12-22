@@ -36,6 +36,7 @@ export default class OneSwipeableView extends Component {
             <img src={player.head_shot}/>
             <div className="playerInfo">
               Name: {`${player.first_name} ${player.last_name}`}<br/><br/>
+              Position: {player.position}<br/><br/>
               {/* College: {player.college}<br/><br/> */}
               {/* Height: {player.height}<br/><br/> */}
               {/* Weight: {player.weight} */}

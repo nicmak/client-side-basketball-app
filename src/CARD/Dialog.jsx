@@ -38,6 +38,12 @@ export default class OneDialog extends Component {
                 onRequestClose={this.handler}
               >
                 <OneSwipeableView player={this.props.player}/>
+                <FlatButton
+                  label="Close"
+                  primary={true}
+                  onClick={this.handler}
+                />
+                <FlatButton label="Add"/>
               </Dialog>
     )
   }
