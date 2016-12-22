@@ -26,15 +26,14 @@ export default class OneCard extends Component {
   };
 
   render() {
-    const player = this.props.player;
-    debugger;
+    const player = this.props.player
     const key = this.props.key
 
     return (
         <Card key={key}>
           <img role="presentation" src={player.head_shot}/>
           <CardMedia className ="cardmedia2" overlay={<CardTitle title ={`${player.first_name} ${player.last_name}`}/>}/>
-            <FlatButton onClick={this.props.addPlayer(player.id)} className="FlatButton" label="Add"/>
+            <FlatButton  className="FlatButton" label="Add"/>
             <FlatButton onClick={this.handler}   label="Statistics"/>
               <Dialog className="views"
                 title="Statistics"

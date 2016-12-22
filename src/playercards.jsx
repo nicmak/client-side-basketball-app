@@ -8,11 +8,12 @@ class PlayerCards extends Component {
     return (
       <Slider>
         {this.props.playersData.map((player, key) => {
-          
-          <OneCard
-            player={this.player}
-            key={this.key}
-          />
+          return (
+            <OneCard
+              player={player}
+              key={key}
+            />
+          );
         })}
       </Slider>
     );

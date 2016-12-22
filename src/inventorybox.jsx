@@ -60,9 +60,10 @@ export default class DrawerOpenRightExample extends React.Component {
               <FlatButton onClick={this.handleToggle} label="Close"/>
           </AppBar>
           <List>
-            {playerData.map((player) => (
+            {playerData.map((player, index) => (
             <ListItem
               disabled={true}
+              key={index}
               leftAvatar=
               {
               <Paper style={style} zDepth={3} size={40}>
