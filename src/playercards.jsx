@@ -14,9 +14,9 @@ class PlayerCards extends Component {
               playerInfo={this.props.playerInfo}
               key={key}
               teams={this.props.teams}
-              getPlayerInfo={this.props.getPlayerInfo}
               getPlayerBoxscores={this.props.getPlayerBoxscores}
               playerStats={this.props.playerStats}
+              getPlayerInfo={this.props.getPlayerInfo}
 
             />
           );

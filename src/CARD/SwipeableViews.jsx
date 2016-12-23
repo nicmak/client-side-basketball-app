@@ -26,11 +26,6 @@ const stationComponents = (playerStats = []) => {
   )
   });
 }
-
-
-
-
-
 export default class OneSwipeableView extends Component {
 
   constructor(props) {
@@ -46,35 +41,7 @@ export default class OneSwipeableView extends Component {
    });
   };
 
-
-
-  // showPlayerStats = () => {
-  //   const playerStats = this.props.playerStats
-  //   playerStats.map((game) => {
-  //     return
-  //       <tr>
-  //         <td>{game.Game}</td>
-  //         <td>{game.AST}</td>
-  //         <td>{game.BLK}</td>
-  //         <td>{game.DREB}</td>
-  //         <td>{game.FG3A}</td>
-  //         <td>{game.FG3M}</td>
-  //         <td>{game.FGA}</td>
-  //         <td>{game.FGM}</td>
-  //         <td>{game.FTA}</td>
-  //         <td>{game.FTM}</td>
-  //         <td>{game.OREB}</td>
-  //         <td>{game.PF}</td>
-  //         <td>{game.PTS}</td>
-  //         <td>{game.STL}</td>
-  //         <td>{game.TOV}</td>
-  //       </tr>
-  //     })
-  // }
-
   render() {
-    console.log("Swipeview component", this.props.playerStats)
-
     const player = this.props.player
     const key = this.props.key
     return (
@@ -82,10 +49,22 @@ export default class OneSwipeableView extends Component {
         <Tabs className="tabs"
           onChange = {this.handleTab}
           value = {this.state.slideIndex}
+          contentContainerStyle={{background: 'red'}}
         >
-          <Tab label="BIO" value={0}/>
-          <Tab label="Statistics" value={1}/>
-          <Tab label="Other" value={2}/>
+          <Tab
+            style={{color:"red"}}
+            label="BIO" value={0}
+          />
+          <Tab
+            style={{color:"red"}}
+            label="Statistics"
+            value={1}
+          />
+          <Tab
+            style={{color:"red"}}
+            label="Other"
+            value={2}
+          />
         </Tabs>
         <SwipeableViews className="views"
           index={this.state.slideIndex}

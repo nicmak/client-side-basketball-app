@@ -49,7 +49,6 @@ export default class OneDialog extends Component {
         open={this.props.opener}
       >
         <OneSwipeableView
-          playerInfo={this.props.playerInfo}
           player={this.props.player}
           playerStats={this.props.playerStats}
         />

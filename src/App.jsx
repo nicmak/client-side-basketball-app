@@ -11,6 +11,7 @@ import '../styles/App.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+
 class App extends Component {
   //I added the constructor for clarity.
   constructor(props) {
@@ -19,7 +20,8 @@ class App extends Component {
       teamCardsAppear: false,
       playerCardsAppear: false,
       Conference:true,
-      teamPlayers: null
+      teamPlayers: null,
+      addedPlayers: []
       // selectedTeam:null
     };
   //  this
@@ -51,7 +53,6 @@ class App extends Component {
         this.setState(
           {
             teamPlayers:player_json,
-            // selectedTeam: team_id,
             playerCardsAppear: !this.state.playerCardsAppear
 
           }
@@ -59,16 +60,25 @@ class App extends Component {
       })
   }
 
-  // getPlayerInfo = (player_id) => {
-  //   fetch(`http://www.localhost:8080/players/${player_id}`)
-  //     .then((response) => {
-  //       return response.json()
-  //     })
-  //     .then((playerInfo) => {
-  //       console.log(`this is the player bio object:`, playerInfo)
-  //       // this.setState({playerInfo})
-  //     })
-  //   }
+  addPlayer = (player) => {
+    let addedPlayers = this.state.addedPlayers
+    addedPlayers.push(player)
+    this.setState({addedPlayers})
+    console.log(this.state.addedPlayers);
+  }
+
+
+  getPlayerInfo = (player_id) => {
+    fetch(`http://www.localhost:8080/players/${player_id}`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((playerInfo) => {
+      let player = playerInfo[0]
+        console.log(`this is the player bio object:`, player)
+        this.addPlayer(player)
+      })
+    }
 
   getPlayerBoxscores = (player_id) => {
     fetch(`http://www.localhost:8080/players/${player_id}/boxscores`)
@@ -82,16 +92,7 @@ class App extends Component {
     }
 
   componentDidMount() {
-    //This imports the teams and puts them in the state.teams.
     this.getTeams()
-    // this.getPlayerBoxscores(4);
-// this.getPlayersFromTeam(25)
-// this.getPlayerInfo(4)
-    //This should be called when you click on one of the teams
-    //so not on componentDidMount. I only put it here to test.
-    //Also, the team_id should also not be hard coded as I do here.
-    // this.getPlayersFromTeam(1)
-
   }
 //--------------------------------------------------------------------
   onWestern = () => {
@@ -130,11 +131,11 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
-          <Navbar/>
-            <DivisionCards
-              onWestern={this.onWestern}
-              onEastern={this.onEastern}
-            />
+          <Navbar addedPlayers={this.state.addedPlayers} />
+          <DivisionCards
+            onWestern={this.onWestern}
+            onEastern={this.onEastern}
+          />
           {
             this.state.teamCardsAppear ?
               <TeamCards
@@ -152,10 +153,9 @@ class App extends Component {
                 playersData={this.state.teamPlayers}
                 playerInfo={this.state.playerInfo}
                 teams={this.state.teams}
-                getPlayerInfo={this.getPlayerInfo}
                 getPlayerBoxscores={this.getPlayerBoxscores}
                 playerStats={this.state.playerStats}
-
+                getPlayerInfo={this.getPlayerInfo}
               />
             : null
           }

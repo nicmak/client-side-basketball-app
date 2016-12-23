@@ -15,13 +15,11 @@ export default class TeamCards extends Component {
   render () {
     const cards = this.props.teams.filter(this.checkDivision).map((team) => {
       return (
-        // once we get data flowing in, replace use this.props.getPlayersFromTeam(team.id)
         <Card key={team.id} onClick={() => { this.props.getPlayersFromTeam(team.id) }} >
           <img className="logo" src={team.logo}/>
           <img role="presentation" src={team.background}/>
           <CardMedia className ="cardmedia" overlay={<CardTitle title={team.location}/>}/>
           <CardActions>
-            {/* <FlatButton label="Add"/> */}
             <FlatButton href={team.website} label="Website"/>
           </CardActions>
         </Card>

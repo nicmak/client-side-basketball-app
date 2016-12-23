@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Card, CardMedia,CardTitle} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import OneDialog from './Dialog.jsx';
+import Snackbar from 'material-ui/Snackbar';
 import '../../styles/card.css';
 
 export default class OneCard extends Component {
@@ -9,12 +10,18 @@ export default class OneCard extends Component {
     super(props);
     this.state = {
       open:false,
+      open2:false,
       slideIndex: 0
     }
   }
   handler = () => {
     this.setState({
       open: !this.state.open
+    })
+  }
+  handlerSnack = () => {
+    this.setState({
+      open2: !this.state.open2
     })
   }
   handleTab = (value) => {
@@ -28,6 +35,7 @@ export default class OneCard extends Component {
     const key = this.props.key
 
     return (
+      <div>
         <Card key={key}>
           <img role="presentation" src={player.head_shot}/>
           <CardMedia className ="cardmedia2"
@@ -37,16 +45,15 @@ export default class OneCard extends Component {
               />}
           />
           <FlatButton
+            onClick={() =>{this.handlerSnack();this.props.getPlayerInfo(player.id)}}
             className="FlatButton"
             label="Add"
           />
           <FlatButton
             onClick={(event) => {this.handler(); this.props.getPlayerBoxscores(player.id);}}
-
-            // onClick={this.props.getPlayerInfo(this.props.player.player_id)}
-
             label="Statistics"
           />
+
           <OneDialog
             teams={this.props.teams}
             handler={this.handler}
@@ -56,6 +63,11 @@ export default class OneCard extends Component {
             playerStats={this.props.playerStats}
           />
         </Card>
+        <Snackbar className="SnackBar"
+          open={this.state.open2}
+          message={`${player.first_name} ${player.last_name} was added to Inventory`}
+        />
+      </div>
     )
   }
 }
