@@ -30,10 +30,31 @@ export default class OneCard extends Component {
     return (
         <Card key={key}>
           <img role="presentation" src={player.head_shot}/>
-          <CardMedia className ="cardmedia2" overlay={<CardTitle title ={`${player.first_name} ${player.last_name}`}/>}/>
-          <FlatButton  className="FlatButton" label="Add"/>
-          <FlatButton   onClick={this.handler}   label="Statistics"/>
-          <OneDialog opener={this.state.open} player={this.props.player}/>
+          <CardMedia className ="cardmedia2"
+            overlay={
+              <CardTitle
+                title ={`${player.first_name} ${player.last_name}`}
+              />}
+          />
+          <FlatButton
+            className="FlatButton"
+            label="Add"
+          />
+          <FlatButton
+            onClick={(event) => {this.handler(); this.props.getPlayerBoxscores(player.id);}}
+
+            // onClick={this.props.getPlayerInfo(this.props.player.player_id)}
+
+            label="Statistics"
+          />
+          <OneDialog
+            teams={this.props.teams}
+            handler={this.handler}
+            opener={this.state.open}
+            player={this.props.player}
+            playerInfo={this.props.playerInfo}
+            playerStats={this.props.playerStats}
+          />
         </Card>
     )
   }

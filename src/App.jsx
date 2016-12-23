@@ -11,89 +11,6 @@ import '../styles/App.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-// const playerData = [
-//   {
-//     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/201942.png",
-//     name:"DeMar DeRozan",
-//     team:"Raptors"
-//   },
-//   {
-//     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/200768.png",
-//     name:"Kyle Lowry",
-//     team:"Lakers"
-//   },
-//   {
-//     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/202685.png",
-//     name:"Jonas Valanciunas",
-//     team:"Chicago Bulls"
-//   },
-//   {
-//     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
-//     name:"Lucas Nogueira",
-//     team:"Cavaliers"
-//   },
-//   {
-//     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
-//     name:"Lucas Nogueira",
-//     team:"Knicks"
-//   },
-//   {
-//     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
-//     name:"Lucas Nogueira",
-//     team:"Golden State"
-//   },
-//   {
-//     headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203512.png",
-//     name:"Lucas Nogueira",
-//     team:"Golden State"
-//   }
-// ]
-
-// const teams = [
-//   {
-//     locationImg:"https://images.trvl-media.com/hotels/15000000/14770000/14762000/14761971/14761971_1_z.jpg",
-//     logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/tor.png",
-//     title:"Raptors",
-//     location:"Toronto",
-//     Conference:"Eastern"
-//   },
-//   {
-//     locationImg:"http://www.quinceanera.com/wp-content/uploads/2015/03/griffith-observatory-at-night-los-feliz-los-angeles.jpg",
-//     logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/lal.png",
-//     title:"Lakers",
-//     location:"Los Angeles",
-//     Conference:"Western"
-//   },
-//   {
-//     locationImg:"http://static.panoramio.com/photos/large/14958187.jpg",
-//     logo:"http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/chi.png",
-//     title:"Chicago Bulls",
-//     location:"Chicago",
-//     Conference:"Eastern"
-//   },
-//   {
-//     locationImg:"http://static.panoramio.com/photos/large/47344885.jpg",
-//     logo:"http://a4.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fnba%2F500%2Fcle.png",
-//     title:"Cavaliers",
-//     location:"Cleveland",
-//     Conference:"Eastern"
-//   },
-//   {
-//     locationImg:"http://traveldigg.com/wp-content/uploads/2016/05/Times-Square-New-York-City-At-Night.jpg",
-//     logo:"http://4.bp.blogspot.com/-rukBOVnZI4w/UT4iMqZnjqI/AAAAAAAAfmg/ZOVIrHf1NRA/s1600/New+York+Knicks+Club+Logo+2013+04.png",
-//     title:"Knicks",
-//     location:"New York",
-//     Conference:"Eastern"
-//   },
-//   {
-//     locationImg:"https://w-dog.net/wallpapers/0/53/337092311092055/night-town-bridge-from-san-francisco-to-oakland-san-francisco-united-states-california.jpg",
-//     logo:"https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/838px-Golden_State_Warriors_logo.svg.png",
-//     title:"Golden State",
-//     location:"California",
-//     Conference:"Western"
-//   }
-// ]
-
 class App extends Component {
   //I added the constructor for clarity.
   constructor(props) {
@@ -147,25 +64,29 @@ class App extends Component {
   //     .then((response) => {
   //       return response.json()
   //     })
-  //     .then((player_json) => {
-  //       console.log(`this is the player bio object:`, player_json)
+  //     .then((playerInfo) => {
+  //       console.log(`this is the player bio object:`, playerInfo)
+  //       // this.setState({playerInfo})
   //     })
   //   }
 
-  // getPlayerBoxscores = (player_id) => {
-  //   fetch(`http://www.localhost:8080/players/${player_id}/boxscores`)
-  //     .then((response) => {
-  //       return response.json()
-  //     })
-  //     .then((playerBoxscore_json) => {
-  //       console.log(`this is the player boxscores:`, playerBoxscore_json)
-  //     })
-  //   }
+  getPlayerBoxscores = (player_id) => {
+    fetch(`http://www.localhost:8080/players/${player_id}/boxscores`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((playerStats) => {
+        console.log(`this is the player boxscores:`, playerStats)
+        this.setState({playerStats})
+      })
+    }
 
   componentDidMount() {
     //This imports the teams and puts them in the state.teams.
     this.getTeams()
-
+    // this.getPlayerBoxscores(4);
+// this.getPlayersFromTeam(25)
+// this.getPlayerInfo(4)
     //This should be called when you click on one of the teams
     //so not on componentDidMount. I only put it here to test.
     //Also, the team_id should also not be hard coded as I do here.
@@ -229,6 +150,12 @@ class App extends Component {
               <PlayerCards
                 addPlayer={this.playerAdd}
                 playersData={this.state.teamPlayers}
+                playerInfo={this.state.playerInfo}
+                teams={this.state.teams}
+                getPlayerInfo={this.getPlayerInfo}
+                getPlayerBoxscores={this.getPlayerBoxscores}
+                playerStats={this.state.playerStats}
+
               />
             : null
           }
