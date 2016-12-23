@@ -12,7 +12,7 @@ class Navbar extends Component {
 
       <div className="Nav">
         Basketball
-        <InventoryBox/>
+        <InventoryBox addedPlayers={this.props.addedPlayers}/>
       </div>
 
 

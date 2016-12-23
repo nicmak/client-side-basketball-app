@@ -10,7 +10,22 @@ div.Background > div > div {
   background-color: sienna !important;
 }
 
+.playerBox > div {
+  position: relative;
+  right: 136px;
+}
+.title {
+  position: relative;
+left: 117px;
+width: 122px;
+color: black;
+bottom: 98px;
+}
+
 .playerImg {
   width: 137px;
-  height: 115px;
+  height: 102px;
+  position: relative;
+  right: 19px;
+  bottom: 2px;
 }
