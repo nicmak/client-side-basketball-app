@@ -118,15 +118,7 @@ class App extends Component {
     //     teamName:this.
     //   })
   }
-  // componentDidMount() {
-  //  fetch('http://www.localhost:8080/')
-  //   .then((response) => {
-  //     return response.text();
-  //   })
-  //   .then((body) => {
-  //     console.log(body)
-  //   })
-  // }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
