@@ -24,8 +24,6 @@ class App extends Component {
       addedPlayers: []
       // selectedTeam:null
     };
-  //  this
-    //this.selectTeam = this.selectTeam.bind(this)
   }
   // This function fetches all the teams when called and appends them in the
   // state.teams
@@ -91,15 +89,13 @@ class App extends Component {
       })
     }
 
-  componentDidMount() {
-    this.getTeams()
-  }
-//--------------------------------------------------------------------
+  
   onWestern = () => {
     console.log("Western felt something")
     this.setState(
       {
         teamCardsAppear: !this.state.teamCardsAppear,
+        // playerCardsAppear: !this.state.playerCardsAppear,
         Conference: false
       })
   }
@@ -108,6 +104,7 @@ class App extends Component {
     this.setState(
       {
         teamCardsAppear: !this.state.teamCardsAppear,
+        // playerCardsAppear: !this.state.playerCardsAppear,
         Conference: true
       })
   }
@@ -117,6 +114,11 @@ class App extends Component {
     //   {
     //     teamName:this.
     //   })
+  }
+//--------------------------------------------------------------------
+
+  componentDidMount() {
+    this.getTeams()
   }
 
   render() {
@@ -136,7 +138,7 @@ class App extends Component {
                 playerShow={this.playerShow}
                 conferenceValue={this.state.Conference}
               />
-            : null
+            : null 
           }
           {
             this.state.playerCardsAppear ?
