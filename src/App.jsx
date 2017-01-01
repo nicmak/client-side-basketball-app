@@ -8,6 +8,7 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../styles/App.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import cookie from 'react-cookie';
 injectTapEventPlugin();
 
 //--------------------------------------------------------------------
@@ -20,7 +21,8 @@ class App extends Component {
       playerCardsAppear: false,
       Conference:true,
       teamPlayers: null,
-      selectedPlayers: []
+      selectedPlayers: [],
+      userID: null
       // selectedTeam:null
     };
   }
@@ -120,6 +122,11 @@ class App extends Component {
     fetch(`http://www.localhost:3000/users/signup`, {
       method:'post',
       body: userInfoJSON
+    })
+    .then((response) => {
+      //The response coming back from the server will be a User ID
+      let userID = response
+      cookie.save('UserID', userID, { path: '/' });
     })
    } 
    else {

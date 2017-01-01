@@ -11,6 +11,7 @@
   "dependencies": {
     "material-ui": "^0.16.5",
     "react": "^15.4.1",
+    "react-cookie": "^1.0.4",
     "react-dom": "^15.4.1",
     "react-drive-in": "^1.7.3",
     "react-image-slider": "^0.1.0",
