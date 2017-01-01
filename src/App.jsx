@@ -3,7 +3,6 @@ import Navbar from './navbar.jsx'
 import DivisionCards from './DivisionCard.jsx'
 import TeamCards from './TeamCards.jsx'
 import PlayerCards from './playercards.jsx'
-import signUp from './signUp.jsx'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -11,9 +10,9 @@ import '../styles/App.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+//--------------------------------------------------------------------
 
 class App extends Component {
-  //I added the constructor for clarity.
   constructor(props) {
     super(props);
     this.state = {
@@ -21,28 +20,24 @@ class App extends Component {
       playerCardsAppear: false,
       Conference:true,
       teamPlayers: null,
-      addedPlayers: []
+      selectedPlayers: []
       // selectedTeam:null
     };
   }
-  // This function fetches all the teams when called and appends them in the
-  // state.teams
+//--------------------------------------------------------------------
   getTeams = () => {
-    fetch(`http://www.localhost:8080/teams`)
+    fetch(`http://www.localhost:3000/teams`)
       .then((response) => {
         return response.json()
       })
       .then((teams) => {
-        //parse the received teams and push into teamsnpm array in stat.
-        //There might be a more efficient to do this.
         console.log(`this are all the teams`, teams)
         this.setState({teams})
       })
   }
-  // This function fetches the players from a given team.
-  // Takes a the team id as an argument.
- getPlayersFromTeam = (team_id) => {
-    fetch(`http://www.localhost:8080/teams/${team_id}/players`)
+
+  getPlayersFromTeam = (team_id) => {
+    fetch(`http://www.localhost:3000/teams/${team_id}/players`)
       .then((response) => {
         return response.json()
       })
@@ -56,100 +51,153 @@ class App extends Component {
         )
       })
   }
-
-  addPlayer = (player) => {
-    let addedPlayers = this.state.addedPlayers
-    addedPlayers.push(player)
-    this.setState({addedPlayers})
-    console.log(this.state.addedPlayers);
+//--------------------------------------------------------------------
+  selectPlayer = (player) => {
+    let selectedPlayers = this.state.selectedPlayers
+    let found = selectedPlayers.some((existPlayer) => {
+      return existPlayer.id === player.id;
+    })
+    if (!found) {
+      selectedPlayers.push(player)
+      console.log("You just added a player")
+      console.log(selectedPlayers);
+      this.setState({selectedPlayers})
+      console.log(this.state)
+    }
   }
 
-
   getPlayerInfo = (player_id) => {
-    fetch(`http://www.localhost:8080/players/${player_id}`)
+    fetch(`http://www.localhost:3000/players/${player_id}`)
       .then((response) => {
         return response.json()
       })
       .then((playerInfo) => {
       let player = playerInfo[0]
-        console.log(`this is the player bio object:`, player)
-        this.addPlayer(player)
+          console.log(`this is the player bio object:`, player)
+          this.selectPlayer(player)
       })
-    }
+  }
 
+  deletePlayer = (selectPlayer) => {
+    let newState = this.state.selectedPlayers;
+    let found = newState.some((existPlayer) => {
+          console.log("existPlayer.id",existPlayer.id, "selectPlayer.id", selectPlayer)
+
+      return existPlayer.id === selectPlayer;
+    })
+    console.log("Player matches",found)
+    console.log(newState)
+    if (found) {
+      let position = newState.indexOf(selectPlayer)
+      newState = newState.splice(position, 1)
+      this.setState({selectedPlayers:newState})
+      console.log("Player got deleted", this.state)
+    }
+    // newState.map((player) => {
+    // // if newState contains 'player', indexOf will return the first index where 
+    // // the player is found, if not indexOf will return -1
+    //   if (player.id === selectPlayer) {
+    //   // Splice
+    //     newState = newState.splice(newState.indexOf(player), 1);
+    //     this.setState({selectedPlayers:newState});
+    //     console.log("Player deleted", this.state.selectedPlayers)
+    //   }
+    // })
+  }
+
+//----------------------------------------------------------------------
+//This function is passed down as a prop to navbar.js, then to Registration.jsx
+//checks to see if email and password are not blank, userInfo as JSON String, will
+// be passed to server via post request
+  registerUser = (email, password) => {
+   if (email != "" && password != "") {
+   let userInfo = {
+      email : email.trim(),
+      password : password.trim()
+    }
+    let userInfoJSON = JSON.stringify(userInfo);
+    console.log("userInfo object sending to server", userInfoJSON)
+    fetch(`http://www.localhost:3000/users/signup`, {
+      method:'post',
+      body: userInfoJSON
+    })
+   } 
+   else {
+    console.log("Missing information")
+   }
+  }
+
+
+
+
+//--------------------------------------------------------------------
   getPlayerBoxscores = (player_id) => {
-    fetch(`http://www.localhost:8080/players/${player_id}/boxscores`)
+    fetch(`http://www.localhost:3000/players/${player_id}/boxscores`)
       .then((response) => {
         return response.json()
       })
-
       .then((playerStats) => {
         console.log(`this is the player boxscores:`, playerStats)
         this.setState({playerStats})
       })
     }
-
-  
+//--------------------------------------------------------------------
   onWestern = () => {
     console.log("Western felt something")
     this.setState(
       {
         teamCardsAppear: !this.state.teamCardsAppear,
-        // playerCardsAppear: !this.state.playerCardsAppear,
         Conference: false
       })
   }
+
   onEastern = () => {
     console.log("Eastern felt something")
     this.setState(
       {
         teamCardsAppear: !this.state.teamCardsAppear,
-        // playerCardsAppear: !this.state.playerCardsAppear,
         Conference: true
       })
   }
-  playerAdd = () => {
-    console.log("You added a player")
-    // this.setState(
-    //   {
-    //     teamName:this.
-    //   })
-  }
+  
 //--------------------------------------------------------------------
 
   componentDidMount() {
     this.getTeams()
   }
+//--------------------------------------------------------------------
 
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
-          <Navbar addedPlayers={this.state.addedPlayers} />
+          <Navbar 
+            selectedPlayers={this.state.selectedPlayers} 
+            deletePlayer={this.deletePlayer}
+            registerUser={this.registerUser}
+
+          />
           <DivisionCards
-            onWestern={this.onWestern}
             onEastern={this.onEastern}
+            onWestern={this.onWestern}
           />
           {
             this.state.teamCardsAppear ?
               <TeamCards
+                conferenceValue={this.state.Conference}
                 getPlayersFromTeam={this.getPlayersFromTeam}
                 teams={this.state.teams}
-                playerShow={this.playerShow}
-                conferenceValue={this.state.Conference}
               />
             : null 
           }
           {
             this.state.playerCardsAppear ?
               <PlayerCards
-                addPlayer={this.playerAdd}
-                playersData={this.state.teamPlayers}
-                playerInfo={this.state.playerInfo}
-                teams={this.state.teams}
                 getPlayerBoxscores={this.getPlayerBoxscores}
-                playerStats={this.state.playerStats}
                 getPlayerInfo={this.getPlayerInfo}
+                playersData={this.state.teamPlayers}
+                playerStats={this.state.playerStats}
+                teams={this.state.teams}
               />
             : null
           }

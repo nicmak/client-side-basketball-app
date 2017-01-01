@@ -20,6 +20,7 @@ export default class OneCard extends Component {
     })
   }
   handlerSnack = () => {
+    console.log("HandlerSnacker")
     this.setState({
       open2: !this.state.open2
     })
@@ -61,6 +62,8 @@ export default class OneCard extends Component {
             player={this.props.player}
             playerInfo={this.props.playerInfo}
             playerStats={this.props.playerStats}
+            getPlayerInfo={this.props.getPlayerInfo}
+            handlerSnack={this.handlerSnack}
           />
         </Card>
         <Snackbar className="SnackBar"

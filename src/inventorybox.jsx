@@ -5,9 +5,10 @@ import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
 import '../styles/Inventorybox.css';
 
-import {FlatButton, RaisedButton} from 'material-ui';
+import {RaisedButton} from 'material-ui';
 
 export default class InventoryBox extends React.Component {
 
@@ -17,16 +18,26 @@ export default class InventoryBox extends React.Component {
       open: false,
     }
   }
-
+//--------------------------------------------------------------------
   handleToggle = () => this.setState({open: !this.state.open});
 
+  // deletePlayer = (player) => {
+  //   const newState = 
+  // }
+
+  //  delete(item){
+  //   const newState = this.state.data;
+  //   if (newState.indexOf(item) > -1) {
+  //     newState.splice(newState.indexOf(item), 1);
+  //     this.setState({data: newState})
+  //   }
+  // }
+  //PUT THIS FUNCTION IN APP.JS AND AS WELL MAKE SURE TO DELETE FOR CUSTOM LIST, DO NOT DELETE 
+  // THE ACTUAL PLAYER ENTRY IN THE PLAYERS TABLE
+//--------------------------------------------------------------------
+
   render() {
-    const playerData = [
-      {
-        headShot:"http://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/201942.png",
-        name:"DeMar DeRozan",
-        team:"Raptors" }
-    ]
+
     const style = {
       height: 100,
       width: 100,
@@ -52,7 +63,7 @@ export default class InventoryBox extends React.Component {
                 label="Close"
               />
           <List>
-            {this.props.addedPlayers.reverse().map((player, index) => (
+            {this.props.selectedPlayers.map((player, index) => (
             <ListItem className="playerBox"
               disabled={true}
               key={index}
@@ -67,6 +78,10 @@ export default class InventoryBox extends React.Component {
                   {`Position: ${player.position}`}
                 </div>
               </Paper>
+              <FlatButton
+                label="Delete"
+                onClick={() =>{this.props.deletePlayer(player.id)}}
+              />
              </ListItem>
             ))}
           </List>

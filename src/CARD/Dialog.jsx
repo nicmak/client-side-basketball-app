@@ -6,6 +6,7 @@ import OneSwipeableView from './SwipeableViews.jsx'
 import '../../styles/card.css';
 
 export default class OneDialog extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,19 +15,24 @@ export default class OneDialog extends Component {
       team:""
     }
   }
+//--------------------------------------------------------------------
 
-    checkTeams = () => {
-      const teams = this.props.teams
-      let name = ""
-      teams.map((team) => {
-        if (team.id === this.props.player.team_id) {
-          name = team.name
-        }
-      })
-      return name
-    }
+  checkTeams = () => {
+    const teams = this.props.teams
+    let name = ""
+    teams.map((team) => {
+      if (team.id === this.props.player.team_id) {
+        name = team.name
+      }
+    })
+    return name
+  }
+//--------------------------------------------------------------------
 
   render() {
+    const player = this.props.player
+    const key = this.props.key
+    
     const actions = [
       <FlatButton
         label="Cancel"
@@ -34,10 +40,9 @@ export default class OneDialog extends Component {
       />,
       <FlatButton
         label = "Add"
+        onClick ={() => {this.props.handlerSnack;this.props.getPlayerInfo(player.id)}}
       />
     ]
-    const player = this.props.player
-    const key = this.props.key
 
     return (
       <Dialog key={key}
