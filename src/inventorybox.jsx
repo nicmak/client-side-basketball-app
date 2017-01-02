@@ -80,7 +80,7 @@ export default class InventoryBox extends React.Component {
               </Paper>
               <FlatButton
                 label="Delete"
-                onClick={() =>{this.props.deletePlayer(player.id)}}
+                onClick={() =>{this.props.deletePlayer(player)}}
               />
              </ListItem>
             ))}

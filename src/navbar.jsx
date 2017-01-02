@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InventoryBox from './inventorybox.jsx'
 import Registration from './Registration.jsx';
+import Login from './Login.jsx';
 import FlatButton from 'material-ui/FlatButton';
 import '../styles/App.css';
 class Navbar extends Component {
@@ -17,7 +18,7 @@ class Navbar extends Component {
           selectedPlayers={this.props.selectedPlayers}
           deletePlayer={this.props.deletePlayer}
          />
-        
+        <Login/>
         <Registration
           registerUser={this.props.registerUser}
         />

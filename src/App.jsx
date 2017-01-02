@@ -82,31 +82,14 @@ class App extends Component {
 
   deletePlayer = (selectPlayer) => {
     let newState = this.state.selectedPlayers;
-    let found = newState.some((existPlayer) => {
-          console.log("existPlayer.id",existPlayer.id, "selectPlayer.id", selectPlayer)
-
-      return existPlayer.id === selectPlayer;
+    let found = newState.forEach((existPlayer) => {
+      if (existPlayer.id === selectPlayer.id) {
+        let position = newState.indexOf(selectPlayer)
+        newState.splice(position, 1)
+        this.setState({selectedPlayers:newState})
+      }
     })
-    console.log("Player matches",found)
-    console.log(newState)
-    if (found) {
-      let position = newState.indexOf(selectPlayer)
-      newState = newState.splice(position, 1)
-      this.setState({selectedPlayers:newState})
-      console.log("Player got deleted", this.state)
-    }
-    // newState.map((player) => {
-    // // if newState contains 'player', indexOf will return the first index where 
-    // // the player is found, if not indexOf will return -1
-    //   if (player.id === selectPlayer) {
-    //   // Splice
-    //     newState = newState.splice(newState.indexOf(player), 1);
-    //     this.setState({selectedPlayers:newState});
-    //     console.log("Player deleted", this.state.selectedPlayers)
-    //   }
-    // })
   }
-
 //----------------------------------------------------------------------
 //This function is passed down as a prop to navbar.js, then to Registration.jsx
 //checks to see if email and password are not blank, userInfo as JSON String, will
@@ -138,14 +121,34 @@ registerUser = (email, password) => {
     console.log("Missing information")
    }
   }
-// method: 'POST',
-//     headers: myHeaders,
-//     mode: 'cors',
-//     cache: 'default',
-//     body: JSON.stringify(fields)
-
-
-
+//--------------------------------------------------------------------
+loginUser = (email,password) => {
+  if (email != "" && password != "") {
+   let userInfo = {
+      email : email.trim(),
+      password : password.trim()
+    }
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    let userInfoJSON = JSON.stringify(userInfo);
+    console.log("userInfo object sending to server", userInfo)
+    fetch(`http://www.localhost:3000/users/login`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: myHeaders,
+      cache: 'default',
+      body: userInfoJSON,
+    })
+    .then((response) => {
+      //The response coming back from the server will be a User ID
+      let userID = response
+      cookie.save('UserID', userID, { path: '/' });
+    })
+   }
+   else {
+    console.log("Missing information")
+   }
+}
 //--------------------------------------------------------------------
   getPlayerBoxscores = (player_id) => {
     fetch(`http://www.localhost:3000/players/${player_id}/boxscores`)
