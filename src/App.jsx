@@ -111,29 +111,38 @@ class App extends Component {
 //This function is passed down as a prop to navbar.js, then to Registration.jsx
 //checks to see if email and password are not blank, userInfo as JSON String, will
 // be passed to server via post request
-  registerUser = (email, password) => {
+registerUser = (email, password) => {
    if (email != "" && password != "") {
    let userInfo = {
       email : email.trim(),
       password : password.trim()
     }
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
     let userInfoJSON = JSON.stringify(userInfo);
-    console.log("userInfo object sending to server", userInfoJSON)
+    console.log("userInfo object sending to server", userInfo)
     fetch(`http://www.localhost:3000/users/signup`, {
-      method:'post',
-      body: userInfoJSON
+      method: 'POST',
+      mode: 'cors',
+      headers: myHeaders,
+      cache: 'default',
+      body: userInfoJSON,
     })
     .then((response) => {
       //The response coming back from the server will be a User ID
       let userID = response
       cookie.save('UserID', userID, { path: '/' });
     })
-   } 
+   }
    else {
     console.log("Missing information")
    }
   }
-
+// method: 'POST',
+//     headers: myHeaders,
+//     mode: 'cors',
+//     cache: 'default',
+//     body: JSON.stringify(fields)
 
 
 
