@@ -22,7 +22,7 @@ class App extends Component {
       Conference:true,
       teamPlayers: null,
       selectedPlayers: [],
-      userID: null
+      userID: null,
       // selectedTeam:null
     };
   }
@@ -82,43 +82,60 @@ class App extends Component {
 
   deletePlayer = (selectPlayer) => {
     let newState = this.state.selectedPlayers;
-    let found = newState.some((existPlayer) => {
-          console.log("existPlayer.id",existPlayer.id, "selectPlayer.id", selectPlayer)
-
-      return existPlayer.id === selectPlayer;
+    let found = newState.forEach((existPlayer) => {
+      if (existPlayer.id === selectPlayer.id) {
+        let position = newState.indexOf(selectPlayer)
+        newState.splice(position, 1)
+        this.setState({selectedPlayers:newState})
+      }
     })
-    console.log("Player matches",found)
-    console.log(newState)
-    if (found) {
-      let position = newState.indexOf(selectPlayer)
-      newState = newState.splice(position, 1)
-      this.setState({selectedPlayers:newState})
-      console.log("Player got deleted", this.state)
-    }
-    // newState.map((player) => {
-    // // if newState contains 'player', indexOf will return the first index where
-    // // the player is found, if not indexOf will return -1
-    //   if (player.id === selectPlayer) {
-    //   // Splice
-    //     newState = newState.splice(newState.indexOf(player), 1);
-    //     this.setState({selectedPlayers:newState});
-    //     console.log("Player deleted", this.state.selectedPlayers)
-    //   }
-    // })
   }
 
+  teamName = (event) => {
+    let teamName = event.target.value
+    this.setState({teamName:teamName})
+  }
+
+  saveTeam = (teamName) => {
+    console.log("Save button Clicked")
+    if (this.state.selectedPlayers.length > 0 && teamName) {
+    let customTeam = {
+      selectedPlayers: this.state.selectedPlayers,
+      teamName: teamName
+    }
+
+    console.log(JSON.stringify(customTeam))
+    // let myHeaders = new Headers();
+    // myHeaders.append('Content-Type', 'application/json');
+    // let customTeamJSON = JSON.stringify(customTeam);
+    // fetch(`http://www.localhost:3000/users/signup`, {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers: myHeaders,
+    //   cache: 'default',
+    //   body: customTeamJSON,
+    // })
+    // .then((response) => {
+    //   console.log("TeamSaved")
+    // })
+
+   }
+   else {
+    console.log("Please Select Players and Provide a Team Name")
+   }
+  }
 //----------------------------------------------------------------------
 //This function is passed down as a prop to navbar.js, then to Registration.jsx
 //checks to see if email and password are not blank, userInfo as JSON String, will
 // be passed to server via post request
-  registerUser = (email, password) => {
+registerUser = (email, password) => {
    if (email != "" && password != "") {
    let userInfo = {
       email : email.trim(),
       password : password.trim()
     }
 
-    var myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     let userInfoJSON = JSON.stringify(userInfo);
     console.log("userInfo object sending to server", userInfo)
@@ -139,10 +156,34 @@ class App extends Component {
     console.log("Missing information")
    }
   }
-
-
-
-
+//--------------------------------------------------------------------
+loginUser = (email,password) => {
+  if (email != "" && password != "") {
+   let userInfo = {
+      email : email.trim(),
+      password : password.trim()
+    }
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    let userInfoJSON = JSON.stringify(userInfo);
+    console.log("userInfo object sending to server", userInfo)
+    fetch(`http://www.localhost:3000/users/login`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: myHeaders,
+      cache: 'default',
+      body: userInfoJSON,
+    })
+    .then((response) => {
+      //The response coming back from the server will be a User ID
+      let userID = response
+      cookie.save('UserID', userID, { path: '/' });
+    })
+   }
+   else {
+    console.log("Missing information")
+   }
+}
 //--------------------------------------------------------------------
   getPlayerBoxscores = (player_id) => {
     fetch(`http://www.localhost:3000/players/${player_id}/boxscores`)
@@ -188,6 +229,9 @@ class App extends Component {
             selectedPlayers={this.state.selectedPlayers}
             deletePlayer={this.deletePlayer}
             registerUser={this.registerUser}
+            teamName={this.teamName}
+            teamNameSnack={this.state.teamName}
+            saveTeam={this.saveTeam}
 
           />
           <DivisionCards
