@@ -7,12 +7,12 @@
 }
 
 div.Background > div > div {
-  background-color: sienna !important;
+  background-color: brown !important;
 }
 
 .playerBox > div {
   position: relative;
-  right: 136px;
+  left: 64px;
 }
 .title {
   position: relative;
@@ -23,9 +23,14 @@ bottom: 98px;
 }
 
 .playerImg {
-  width: 137px;
-  height: 102px;
-  position: relative;
-  right: 19px;
-  bottom: 2px;
+      width: 103px;
+    height: 91px;
+    position: relative;
+    right: 2px;
+    bottom: -9px;
+}
+
+.CustomTeam {
+      top: 0px;
+    width: 371px !important
 }

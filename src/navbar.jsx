@@ -17,6 +17,10 @@ class Navbar extends Component {
         <InventoryBox 
           selectedPlayers={this.props.selectedPlayers}
           deletePlayer={this.props.deletePlayer}
+          teamName={this.props.teamName}
+          saveTeam={this.props.saveTeam}
+          teamNameSnack={this.props.teamNameSnack}
+
          />
         <Login/>
         <Registration

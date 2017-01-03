@@ -9,7 +9,6 @@ import '../styles/image-slider.css';
 export default class TeamCards extends Component {
 
   checkDivision = (teamObject) => {
-    console.log('12', teamObject.division);
     return teamObject.division === this.props.conferenceValue
   }
   render () {

@@ -22,7 +22,7 @@ class App extends Component {
       Conference:true,
       teamPlayers: null,
       selectedPlayers: [],
-      userID: null
+      userID: null,
       // selectedTeam:null
     };
   }
@@ -89,6 +89,39 @@ class App extends Component {
         this.setState({selectedPlayers:newState})
       }
     })
+  }
+
+  teamName = (event) => {
+    let teamName = event.target.value
+    this.setState({teamName:teamName})
+  }
+
+  saveTeam = (teamName) => {
+    console.log("Save button Clicked")
+    if (this.state.selectedPlayers.length > 0 && teamName) {
+    let customTeam = {
+      selectedPlayers: this.state.selectedPlayers,
+      teamName: teamName
+    }
+    console.log(JSON.stringify(customTeam))
+    // let myHeaders = new Headers();
+    // myHeaders.append('Content-Type', 'application/json');
+    // let customTeamJSON = JSON.stringify(customTeam);
+    // fetch(`http://www.localhost:3000/users/signup`, {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers: myHeaders,
+    //   cache: 'default',
+    //   body: customTeamJSON,
+    // })
+    // .then((response) => {
+    //   console.log("TeamSaved")
+    // })
+   
+   }
+   else {
+    console.log("Please Select Players and Provide a Team Name")
+   }
   }
 //----------------------------------------------------------------------
 //This function is passed down as a prop to navbar.js, then to Registration.jsx
@@ -194,6 +227,9 @@ loginUser = (email,password) => {
             selectedPlayers={this.state.selectedPlayers} 
             deletePlayer={this.deletePlayer}
             registerUser={this.registerUser}
+            teamName={this.teamName}
+            teamNameSnack={this.state.teamName}
+            saveTeam={this.saveTeam}
 
           />
           <DivisionCards

@@ -46,7 +46,7 @@ export default class OneCard extends Component {
               />}
           />
           <FlatButton
-            onClick={() =>{this.handlerSnack();this.props.getPlayerInfo(player.id)}}
+            onClick={() =>{this.props.getPlayerInfo(player.id)}}
             className="FlatButton"
             label="Add"
           />
@@ -68,6 +68,7 @@ export default class OneCard extends Component {
         </Card>
         <Snackbar className="SnackBar"
           open={this.state.open2}
+          autoHideDuration={3000}
           message={`${player.first_name} ${player.last_name} was added to Inventory`}
         />
       </div>

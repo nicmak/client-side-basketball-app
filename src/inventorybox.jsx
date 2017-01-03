@@ -6,6 +6,12 @@ import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import Snackbar from 'material-ui/Snackbar';
+
+import {deepOrange500} from 'material-ui/styles/colors';
+
+
 import '../styles/Inventorybox.css';
 
 import {RaisedButton} from 'material-ui';
@@ -16,24 +22,27 @@ export default class InventoryBox extends React.Component {
     super(props);
     this.state = {
       open: false,
+      open2: false,
+      teamName:""
     }
   }
 //--------------------------------------------------------------------
   handleToggle = () => this.setState({open: !this.state.open});
+  
+  handlerSnack = () => {
+    console.log("HandlerSnacker")
+    this.setState({
+      open2: !this.state.open2
+    })
+  }
 
-  // deletePlayer = (player) => {
-  //   const newState = 
-  // }
+  handleTeamName = (event) => {
+    console.log("hi")
+    this.setState({teamName:event.target.value})
+    console.log(this.state.teamName)
+  }
 
-  //  delete(item){
-  //   const newState = this.state.data;
-  //   if (newState.indexOf(item) > -1) {
-  //     newState.splice(newState.indexOf(item), 1);
-  //     this.setState({data: newState})
-  //   }
-  // }
-  //PUT THIS FUNCTION IN APP.JS AND AS WELL MAKE SURE TO DELETE FOR CUSTOM LIST, DO NOT DELETE 
-  // THE ACTUAL PLAYER ENTRY IN THE PLAYERS TABLE
+  
 //--------------------------------------------------------------------
 
   render() {
@@ -58,10 +67,23 @@ export default class InventoryBox extends React.Component {
           open={this.state.open}
         >
           <AppBar title="User's Inventory"/>
-              <FlatButton
-                onClick={this.handleToggle}
-                label="Close"
-              />
+          <FlatButton
+            onClick={this.handleToggle}
+            label="Close"
+          />
+          <FlatButton
+            onClick={() => {this.props.saveTeam(this.state.teamName);}}
+            label="Save"
+          />
+          <TextField
+            className="CustomTeam"
+            hintText="Custom Team #1"
+            floatingLabelText="Please Enter Team Name"
+            floatingLabelStyle={{color: deepOrange500}}
+            // onChange={this.props.teamName}
+            onChange={this.handleTeamName}
+          />
+
           <List>
             {this.props.selectedPlayers.map((player, index) => (
             <ListItem className="playerBox"
@@ -74,8 +96,11 @@ export default class InventoryBox extends React.Component {
                   src={player.head_shot}
                 />
                 <div className="title">
-                  {`${player.first_name} ${player.last_name}`}
-                  {`Position: ${player.position}`}
+                  {
+                    `Name: ${player.first_name} ${player.last_name}
+                    Position: ${player.position}`
+                  }
+                  
                 </div>
               </Paper>
               <FlatButton
@@ -86,6 +111,11 @@ export default class InventoryBox extends React.Component {
             ))}
           </List>
         </Drawer>
+        <Snackbar
+          open={this.state.open2}
+          autoHideDuration={3000}
+          message={`${this.props.teamNameSnack} was added`}
+        />
       </div>
     );
   }
