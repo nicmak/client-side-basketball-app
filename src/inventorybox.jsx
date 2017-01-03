@@ -72,7 +72,7 @@ export default class InventoryBox extends React.Component {
             label="Close"
           />
           <FlatButton
-            onClick={() => {this.props.saveTeam(this.state.teamName);}}
+            onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack()}}
             label="Save"
           />
           <TextField
@@ -80,7 +80,6 @@ export default class InventoryBox extends React.Component {
             hintText="Custom Team #1"
             floatingLabelText="Please Enter Team Name"
             floatingLabelStyle={{color: deepOrange500}}
-            // onChange={this.props.teamName}
             onChange={this.handleTeamName}
           />
 
@@ -111,10 +110,9 @@ export default class InventoryBox extends React.Component {
             ))}
           </List>
         </Drawer>
-        <Snackbar
+        <Snackbar className="SnackbarInventory"
           open={this.state.open2}
-          autoHideDuration={3000}
-          message={`${this.props.teamNameSnack} was added`}
+          message={`${this.state.teamName} was added`}
         />
       </div>
     );

@@ -46,7 +46,7 @@ export default class OneCard extends Component {
               />}
           />
           <FlatButton
-            onClick={() =>{this.props.getPlayerInfo(player.id)}}
+            onClick={() =>{this.props.getPlayerInfo(player.id); this.handlerSnack()}}
             className="FlatButton"
             label="Add"
           />
