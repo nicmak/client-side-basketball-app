@@ -96,7 +96,7 @@ class App extends Component {
       console.log("Player got deleted", this.state)
     }
     // newState.map((player) => {
-    // // if newState contains 'player', indexOf will return the first index where 
+    // // if newState contains 'player', indexOf will return the first index where
     // // the player is found, if not indexOf will return -1
     //   if (player.id === selectPlayer) {
     //   // Splice
@@ -117,18 +117,24 @@ class App extends Component {
       email : email.trim(),
       password : password.trim()
     }
+
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
     let userInfoJSON = JSON.stringify(userInfo);
-    console.log("userInfo object sending to server", userInfoJSON)
+    console.log("userInfo object sending to server", userInfo)
     fetch(`http://www.localhost:3000/users/signup`, {
-      method:'post',
-      body: userInfoJSON
+      method: 'POST',
+      mode: 'cors',
+      headers: myHeaders,
+      cache: 'default',
+      body: userInfoJSON,
     })
     .then((response) => {
       //The response coming back from the server will be a User ID
       let userID = response
       cookie.save('UserID', userID, { path: '/' });
     })
-   } 
+   }
    else {
     console.log("Missing information")
    }
@@ -166,7 +172,7 @@ class App extends Component {
         Conference: true
       })
   }
-  
+
 //--------------------------------------------------------------------
 
   componentDidMount() {
@@ -178,8 +184,8 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
-          <Navbar 
-            selectedPlayers={this.state.selectedPlayers} 
+          <Navbar
+            selectedPlayers={this.state.selectedPlayers}
             deletePlayer={this.deletePlayer}
             registerUser={this.registerUser}
 
@@ -195,7 +201,7 @@ class App extends Component {
                 getPlayersFromTeam={this.getPlayersFromTeam}
                 teams={this.state.teams}
               />
-            : null 
+            : null
           }
           {
             this.state.playerCardsAppear ?
