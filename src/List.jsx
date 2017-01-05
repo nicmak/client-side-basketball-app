@@ -27,7 +27,7 @@ export default class OneList extends Component {
             hintText="Custom Team #1"
             floatingLabelText="Please Enter Team Name"
             floatingLabelStyle={{color: deepOrange500}}
-            onChange={this.handleTeamName}
+            onChange={this.props.handleTeamName}
          />
         <List>
             {this.props.selectedPlayers.map((player, index) => (

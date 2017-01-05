@@ -99,21 +99,30 @@ class App extends Component {
     this.setState({teamName:teamName})
   }
 
+  selectPlayer_id = (selectedPlayers) => {
+    let player_id = []
+    selectedPlayers.forEach((object) => {
+      player_id.push(object.id)
+    })
+    return player_id;
+  }
+
   saveTeam = (teamName) => {
-    console.log("Save button Clicked")
     if (this.state.selectedPlayers.length > 0 && teamName) {
+    console.log("condition passed")
     let customTeam = {
-      selectedPlayers: this.state.selectedPlayers,
-      teamName: teamName
+      players: this.selectPlayer_id(this.state.selectedPlayers),
+      name: teamName
     }
-    console.log(JSON.stringify(customTeam))
-    // let myHeaders = new Headers();
-    // myHeaders.append('Content-Type', 'application/json');
-    // let customTeamJSON = JSON.stringify(customTeam);
+    let customTeamJSON = JSON.stringify(customTeam);
+    console.log("customTeamJSON",customTeamJSON)
     // fetch(`http://www.localhost:3000/users/signup`, {
     //   method: 'POST',
     //   mode: 'cors',
-    //   headers: myHeaders,
+    //   headers: {
+    //     "Content-Type" : "application/json",
+    //     "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+    //   } ,
     //   cache: 'default',
     //   body: customTeamJSON,
     // })
@@ -259,6 +268,7 @@ logoutUser = () => {
             currentUser={this.state.currentUser}
 
           />
+
           <DivisionCards
             onEastern={this.onEastern}
             onWestern={this.onWestern}

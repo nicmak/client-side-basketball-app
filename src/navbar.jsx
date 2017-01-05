@@ -3,6 +3,7 @@ import InventoryBox from './inventorybox.jsx'
 import Registration from './Registration.jsx';
 import Login from './Login.jsx';
 import FlatButton from 'material-ui/FlatButton';
+import {Link} from 'react-router'
 import '../styles/App.css';
 class Navbar extends Component {
 
@@ -10,7 +11,7 @@ class Navbar extends Component {
     return (
 
       <div className="Nav">
-        Welcome!!! {this.props.currentUser}
+      {this.props.currentUser}
         <InventoryBox 
           selectedPlayers={this.props.selectedPlayers}
           deletePlayer={this.props.deletePlayer}
@@ -19,6 +20,11 @@ class Navbar extends Component {
           teamNameSnack={this.props.teamNameSnack}
 
          />
+        
+        <FlatButton
+          label="Inventory"
+          href="/Inventory"
+        />
         <Login
           loginUser={this.props.loginUser}
 

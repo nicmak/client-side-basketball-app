@@ -12,6 +12,8 @@ import '../styles/Inventorybox.css';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 
+
+
 import {RaisedButton} from 'material-ui';
 
 export default class InventoryBox extends React.Component {
@@ -37,9 +39,7 @@ export default class InventoryBox extends React.Component {
   }
 
   handleTeamName = (event) => {
-    console.log("hi")
     this.setState({teamName:event.target.value})
-    console.log(this.state.teamName)
   }  
 //--------------------------------------------------------------------
   render() {
@@ -61,7 +61,7 @@ export default class InventoryBox extends React.Component {
             label="Close"
           />
           <FlatButton
-            onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack();this.makeHandler()}}
+            onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack();}}
             label="Save"
           />   
           <Tabs className="tabs">
@@ -76,9 +76,11 @@ export default class InventoryBox extends React.Component {
             index={this.state.slideIndex}
             onChangeIndex={this.handleTab}
           >
+            
             <OneList
               selectedPlayers={this.props.selectedPlayers}
               deletePlayer={this.props.deletePlayer}
+              handleTeamName={this.handleTeamName}
             />   
           </SwipeableViews>
          
