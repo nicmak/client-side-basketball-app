@@ -7,13 +7,10 @@ import '../styles/App.css';
 class Navbar extends Component {
 
   render () {
-
-
-
     return (
 
       <div className="Nav">
-        Basketball
+        Welcome!!! {this.props.currentUser}
         <InventoryBox 
           selectedPlayers={this.props.selectedPlayers}
           deletePlayer={this.props.deletePlayer}
@@ -22,9 +19,18 @@ class Navbar extends Component {
           teamNameSnack={this.props.teamNameSnack}
 
          />
-        <Login/>
+        <Login
+          loginUser={this.props.loginUser}
+
+        />
+        <FlatButton
+          onClick={this.props.logoutUser}
+          label="Logout"
+
+        />
         <Registration
           registerUser={this.props.registerUser}
+
         />
       </div>
 

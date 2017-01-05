@@ -48,6 +48,7 @@ export default class Login extends Component {
       />,
       <FlatButton
         label="Login"
+        onClick={ () =>{this.props.loginUser(this.state.email, this.state.password)}}
       />,
     ]
     return (

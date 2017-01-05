@@ -9,6 +9,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../styles/App.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import cookie from 'react-cookie';
+import jwtDecode from'jwt-decode';
+
 injectTapEventPlugin();
 //Hello
 //--------------------------------------------------------------------
@@ -22,7 +24,8 @@ class App extends Component {
       Conference:true,
       teamPlayers: null,
       selectedPlayers: [],
-      userID: null,
+      userID: null
+
       // selectedTeam:null
     };
   }
@@ -133,26 +136,40 @@ registerUser = (email, password) => {
       email : email.trim(),
       password : password.trim()
     }
-    let myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+
     let userInfoJSON = JSON.stringify(userInfo);
     console.log("userInfo object sending to server", userInfo)
     fetch(`http://www.localhost:3000/users/signup`, {
       method: 'POST',
       mode: 'cors',
-      headers: myHeaders,
+      headers: {
+        "Content-Type" : "application/json",
+        // "Authorization" : `Bearer ${this.state.token} `
+      },
       cache: 'default',
       body: userInfoJSON,
     })
-    .then((response) => {
-      //The response coming back from the server will be a User ID
-      let userID = response
-      cookie.save('UserID', userID, { path: '/' });
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log("responsejson",responseJson)
+      // this.setState({token:responseJson.token})
+      //sessionStorage is seemingly better, does not erase token after
+      //refreshing
+      sessionStorage.setItem('token',responseJson.token);
+      console.log("Stored in SessionStorage");
+      let decoded = jwtDecode(responseJson.token)
+      console.log('decoded',decoded)
+      console.log(decoded.email)
+      this.setState({currentUser:decoded.email})
     })
-   }
-   else {
-    console.log("Missing information")
-   }
+      //The response coming back from the server will be a User ID
+      // console.log("response",response.json)
+      // let userID = response
+      // cookie.save('UserID', userID, { path: '/' });
+    }
+     else {
+      console.log("Missing information")
+     }
   }
 //--------------------------------------------------------------------
 loginUser = (email,password) => {
@@ -161,26 +178,38 @@ loginUser = (email,password) => {
       email : email.trim(),
       password : password.trim()
     }
-    let myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
     let userInfoJSON = JSON.stringify(userInfo);
     console.log("userInfo object sending to server", userInfo)
-    fetch(`http://www.localhost:3000/users/login`, {
+    fetch(`http://www.localhost:3000/users/signin`, {
       method: 'POST',
       mode: 'cors',
-      headers: myHeaders,
+      headers: {
+        "Content-Type" : "application/json",
+        // "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      },      
       cache: 'default',
       body: userInfoJSON,
     })
-    .then((response) => {
-      //The response coming back from the server will be a User ID
-      let userID = response
-      cookie.save('UserID', userID, { path: '/' });
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log("responsejson",responseJson)
+      // this.setState({token:responseJson.token})
+      //sessionStorage is seemingly better, does not erase token after
+      //refreshing
+      sessionStorage.setItem('token',responseJson.token);
+      console.log("Stored");
     })
-   }
-   else {
-    console.log("Missing information")
-   }
+  }
+   
+ else {
+  console.log("Missing information")
+ }
+}
+
+logoutUser = () => {
+  sessionStorage.clear();
+  console.log("JWT session cleared")
+  this.setState({currentUser:""})
 }
 //--------------------------------------------------------------------
   getPlayerBoxscores = (player_id) => {
@@ -216,6 +245,11 @@ loginUser = (email,password) => {
 
   componentDidMount() {
     this.getTeams()
+    let token = sessionStorage.getItem('token');
+    let decoded = jwtDecode(token)
+      console.log('decoded',decoded)
+      console.log(decoded.email)
+      this.setState({currentUser:decoded.email})
   }
 //--------------------------------------------------------------------
 
@@ -227,9 +261,12 @@ loginUser = (email,password) => {
             selectedPlayers={this.state.selectedPlayers} 
             deletePlayer={this.deletePlayer}
             registerUser={this.registerUser}
+            loginUser={this.loginUser}
+            logoutUser={this.logoutUser}
             teamName={this.teamName}
             teamNameSnack={this.state.teamName}
             saveTeam={this.saveTeam}
+            currentUser={this.state.currentUser}
 
           />
           <DivisionCards
