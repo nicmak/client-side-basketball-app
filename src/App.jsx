@@ -116,19 +116,19 @@ class App extends Component {
     }
     let customTeamJSON = JSON.stringify(customTeam);
     console.log("customTeamJSON",customTeamJSON)
-    // fetch(`http://www.localhost:3000/users/signup`, {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers: {
-    //     "Content-Type" : "application/json",
-    //     "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
-    //   } ,
-    //   cache: 'default',
-    //   body: customTeamJSON,
-    // })
-    // .then((response) => {
-    //   console.log("TeamSaved")
-    // })
+    fetch(`http://www.localhost:3000/custom_teams/new `, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        "Content-Type" : "application/json",
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      } ,
+      cache: 'default',
+      body: customTeamJSON,
+    })
+    .then((response) => {
+      console.log("TeamSaved")
+    })
    
    }
    else {
