@@ -152,15 +152,8 @@ registerUser = (email, password) => {
     .then((response) => response.json())
     .then((responseJson) => {
       console.log("responsejson",responseJson)
-      // this.setState({token:responseJson.token})
-      //sessionStorage is seemingly better, does not erase token after
-      //refreshing
       sessionStorage.setItem('token',responseJson.token);
       console.log("Stored in SessionStorage");
-      let decoded = jwtDecode(responseJson.token)
-      console.log('decoded',decoded)
-      console.log(decoded.email)
-      this.setState({currentUser:decoded.email})
     })
       //The response coming back from the server will be a User ID
       // console.log("response",response.json)
@@ -193,9 +186,6 @@ loginUser = (email,password) => {
     .then((response) => response.json())
     .then((responseJson) => {
       console.log("responsejson",responseJson)
-      // this.setState({token:responseJson.token})
-      //sessionStorage is seemingly better, does not erase token after
-      //refreshing
       sessionStorage.setItem('token',responseJson.token);
       console.log("Stored");
     })
