@@ -1,9 +1,21 @@
 import React, {Component} from "react";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import FlatButton from 'material-ui/FlatButton';
+
+import {Link} from 'react-router';
 
 export default class InventoryPage extends Component {
   render() {
     return (
-      <h1>Inventory Page</h1>
+    	<div>
+	      <Link to='/'>Home</Link>
+      </div>
+
     )
   }
 }
+
+
+

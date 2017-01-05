@@ -6,13 +6,13 @@ import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
-
-import {deepOrange500} from 'material-ui/styles/colors';
-
-
+import OneList from './List.jsx'
 import '../styles/Inventorybox.css';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
+
+
 
 import {RaisedButton} from 'material-ui';
 
@@ -23,7 +23,9 @@ export default class InventoryBox extends React.Component {
     this.state = {
       open: false,
       open2: false,
-      teamName:""
+      teamName:"",
+      slideIndex: 0
+
     }
   }
 //--------------------------------------------------------------------
@@ -37,23 +39,10 @@ export default class InventoryBox extends React.Component {
   }
 
   handleTeamName = (event) => {
-    console.log("hi")
     this.setState({teamName:event.target.value})
-    console.log(this.state.teamName)
-  }
-
-  
+  }  
 //--------------------------------------------------------------------
-
   render() {
-
-    const style = {
-      height: 100,
-      width: 100,
-      margin: 20,
-      textAlign: 'center',
-      display: 'inline-block',
-    };
     return (
        <div>
          <RaisedButton
@@ -72,43 +61,29 @@ export default class InventoryBox extends React.Component {
             label="Close"
           />
           <FlatButton
-            onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack()}}
+            onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack();}}
             label="Save"
-          />
-          <TextField
-            className="CustomTeam"
-            hintText="Custom Team #1"
-            floatingLabelText="Please Enter Team Name"
-            floatingLabelStyle={{color: deepOrange500}}
-            onChange={this.handleTeamName}
-          />
+          />   
+          <Tabs className="tabs">
+            <Tab
+              style={{color:"red"}}
+              label="BIO" value={0}
+            />
+            </Tabs>
 
-          <List>
-            {this.props.selectedPlayers.map((player, index) => (
-            <ListItem className="playerBox"
-              disabled={true}
-              key={index}
-            >
-              <Paper style={style} zDepth={3} size={40}>
-                <img
-                  className="playerImg"
-                  src={player.head_shot}
-                />
-                <div className="title">
-                  {
-                    `Name: ${player.first_name} ${player.last_name}
-                    Position: ${player.position}`
-                  }
-                  
-                </div>
-              </Paper>
-              <FlatButton
-                label="Delete"
-                onClick={() =>{this.props.deletePlayer(player)}}
-              />
-             </ListItem>
-            ))}
-          </List>
+          <SwipeableViews 
+            className="views"
+            index={this.state.slideIndex}
+            onChangeIndex={this.handleTab}
+          >
+            
+            <OneList
+              selectedPlayers={this.props.selectedPlayers}
+              deletePlayer={this.props.deletePlayer}
+              handleTeamName={this.handleTeamName}
+            />   
+          </SwipeableViews>
+         
         </Drawer>
         <Snackbar className="SnackbarInventory"
           open={this.state.open2}

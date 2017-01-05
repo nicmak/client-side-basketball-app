@@ -9,6 +9,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../styles/App.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import cookie from 'react-cookie';
+import jwtDecode from'jwt-decode';
+
 injectTapEventPlugin();
 //Hello
 //--------------------------------------------------------------------
@@ -22,7 +24,8 @@ class App extends Component {
       Conference:true,
       teamPlayers: null,
       selectedPlayers: [],
-      userID: null,
+      userID: null
+
       // selectedTeam:null
     };
   }
@@ -96,28 +99,36 @@ class App extends Component {
     this.setState({teamName:teamName})
   }
 
-  saveTeam = (teamName) => {
-    console.log("Save button Clicked")
-    if (this.state.selectedPlayers.length > 0 && teamName) {
-    let customTeam = {
-      selectedPlayers: this.state.selectedPlayers,
-      teamName: teamName
-    }
+  selectPlayer_id = (selectedPlayers) => {
+    let player_id = []
+    selectedPlayers.forEach((object) => {
+      player_id.push(object.id)
+    })
+    return player_id;
+  }
 
-    console.log(JSON.stringify(customTeam))
-    // let myHeaders = new Headers();
-    // myHeaders.append('Content-Type', 'application/json');
-    // let customTeamJSON = JSON.stringify(customTeam);
-    // fetch(`http://www.localhost:3000/users/signup`, {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers: myHeaders,
-    //   cache: 'default',
-    //   body: customTeamJSON,
-    // })
-    // .then((response) => {
-    //   console.log("TeamSaved")
-    // })
+  saveTeam = (teamName) => {
+    if (this.state.selectedPlayers.length > 0 && teamName) {
+    console.log("condition passed")
+    let customTeam = {
+      players: this.selectPlayer_id(this.state.selectedPlayers),
+      name: teamName
+    }
+    let customTeamJSON = JSON.stringify(customTeam);
+    console.log("customTeamJSON",customTeamJSON)
+    fetch(`http://www.localhost:3000/custom_teams/new `, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        "Content-Type" : "application/json",
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      } ,
+      cache: 'default',
+      body: customTeamJSON,
+    })
+    .then((response) => {
+      console.log("TeamSaved")
+    })
 
    }
    else {
@@ -135,26 +146,32 @@ registerUser = (email, password) => {
       password : password.trim()
     }
 
-    let myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
     let userInfoJSON = JSON.stringify(userInfo);
     console.log("userInfo object sending to server", userInfo)
     fetch(`http://www.localhost:3000/users/signup`, {
       method: 'POST',
       mode: 'cors',
-      headers: myHeaders,
+      headers: {
+        "Content-Type" : "application/json",
+        // "Authorization" : `Bearer ${this.state.token} `
+      },
       cache: 'default',
       body: userInfoJSON,
     })
-    .then((response) => {
-      //The response coming back from the server will be a User ID
-      let userID = response
-      cookie.save('UserID', userID, { path: '/' });
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log("responsejson",responseJson)
+      sessionStorage.setItem('token',responseJson.token);
+      console.log("Stored in SessionStorage");
     })
-   }
-   else {
-    console.log("Missing information")
-   }
+      //The response coming back from the server will be a User ID
+      // console.log("response",response.json)
+      // let userID = response
+      // cookie.save('UserID', userID, { path: '/' });
+    }
+     else {
+      console.log("Missing information")
+     }
   }
 //--------------------------------------------------------------------
 loginUser = (email,password) => {
@@ -163,26 +180,35 @@ loginUser = (email,password) => {
       email : email.trim(),
       password : password.trim()
     }
-    let myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
     let userInfoJSON = JSON.stringify(userInfo);
     console.log("userInfo object sending to server", userInfo)
-    fetch(`http://www.localhost:3000/users/login`, {
+    fetch(`http://www.localhost:3000/users/signin`, {
       method: 'POST',
       mode: 'cors',
-      headers: myHeaders,
+      headers: {
+        "Content-Type" : "application/json",
+        // "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      },
       cache: 'default',
       body: userInfoJSON,
     })
-    .then((response) => {
-      //The response coming back from the server will be a User ID
-      let userID = response
-      cookie.save('UserID', userID, { path: '/' });
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log("responsejson",responseJson)
+      sessionStorage.setItem('token',responseJson.token);
+      console.log("Stored");
     })
-   }
-   else {
-    console.log("Missing information")
-   }
+  }
+
+ else {
+  console.log("Missing information")
+ }
+}
+
+logoutUser = () => {
+  sessionStorage.clear();
+  console.log("JWT session cleared")
+  this.setState({currentUser:""})
 }
 //--------------------------------------------------------------------
   getPlayerBoxscores = (player_id) => {
@@ -218,6 +244,11 @@ loginUser = (email,password) => {
 
   componentDidMount() {
     this.getTeams()
+    let token = sessionStorage.getItem('token');
+    let decoded = jwtDecode(token)
+      console.log('decoded',decoded)
+      console.log(decoded.email)
+      this.setState({currentUser:decoded.email})
   }
 //--------------------------------------------------------------------
 
@@ -229,11 +260,15 @@ loginUser = (email,password) => {
             selectedPlayers={this.state.selectedPlayers}
             deletePlayer={this.deletePlayer}
             registerUser={this.registerUser}
+            loginUser={this.loginUser}
+            logoutUser={this.logoutUser}
             teamName={this.teamName}
             teamNameSnack={this.state.teamName}
             saveTeam={this.saveTeam}
+            currentUser={this.state.currentUser}
 
           />
+
           <DivisionCards
             onEastern={this.onEastern}
             onWestern={this.onWestern}
