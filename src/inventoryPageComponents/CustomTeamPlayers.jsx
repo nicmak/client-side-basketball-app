@@ -5,7 +5,14 @@ import '../../styles/InventoryPage.css';
 import CustomPlayStats from './CustomPlayStats.jsx'
 import FlatButton from 'material-ui/FlatButton';
 
+const handler = () => {
+  console.log("hello")
+}
+
 const stationComponents = (playerStats = [],key) => {
+  console.log(playerStats)
+  // if (playerStats.length > 0) {
+  console.log("Table is made")
   return playerStats.map((game,key)=> {
     return (
     <table key={key}>
@@ -48,13 +55,10 @@ const stationComponents = (playerStats = [],key) => {
     </table>
   )
   });
+// }
 }
 
 export default class CustomTeamPlayers extends Component {
-
-
-
-
 	render () {
 		return (
 			<div>
@@ -75,19 +79,24 @@ export default class CustomTeamPlayers extends Component {
 	              } 
 	              <FlatButton
 	              label="Statistics"
-	              onClick={() =>{this.props.getPlayerBoxscores(player.id)}}
-	              />
-	            </div>
-	            <div className="Stats">
-                  {
-                    // getPlayerStatsArrays(this.props.playerStatsArray)
-                    stationComponents(this.props.playerStats, index)
+                onClick={() => {this.props.getPlayerBoxscores(player.id)}}
+                // onClick={()=>{handler()}}
+
+                    // {this.props.getPlayerBoxscores(player.id)}
+                />
+              </div>
+              <div className="Stats" key={index}>
+                  { 
+
+                    this.props.playerStats[0].player_id === player.id ?
+                    stationComponents(this.props.playerStats)
+                    :null
                   }
               </div>
 	            
 	            
 	          </div>
-		      	))
+            ))
 	      :null
 			}
       </div>

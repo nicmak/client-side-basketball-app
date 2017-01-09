@@ -21,7 +21,8 @@ export default class InventoryPage extends Component {
     	customTeamName:"",
     	selectedPlayersAppear: false,
       playerArray: [],
-      playerStatsArray: []
+      playerStatsArray: [],
+      playerStats: [{player_id:0}]
     };
 	}
 
@@ -73,6 +74,7 @@ export default class InventoryPage extends Component {
 	     	let id = player.player_id;
 	     	this.getPlayerInfo(id)
 
+
 	     })
 		 })
 	}
@@ -87,18 +89,21 @@ export default class InventoryPage extends Component {
         let player = playerInfo[0]
         playerArray.push(player)
         this.setState({playerArray})
+        // this.getPlayerBoxscores(player_id)
+
 	    })
   }
 
   getPlayerBoxscores = (player_id) => {
+    console.log("hello")
     let playerStatsArray = this.state.playerStatsArray
     fetch(`http://www.localhost:3000/players/${player_id}/boxscores`)
       .then((response) => {
         return response.json()
       })
       .then((playerStats) => {
-        console.log("playerStats",playerStats)
         this.setState({playerStats})
+        console.log(this.state.playerStats)
         // this.setState({playerStatsArray})
         // console.log("playerStatsArray",this.state.playerStatsArray)
       })
