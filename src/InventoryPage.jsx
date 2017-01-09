@@ -36,15 +36,9 @@ export default class InventoryPage extends Component {
     })
 		 .then((response) => response.json())
 		 .then((responseJson) => {
-	     // console.log('getCustomTeams', responseJson)
 	     let customTeams = responseJson
        this.setState({customTeams})
-       // console.log("All states",this.state)
-       //  customTeams.forEach((customTeam) => {
-       //    console.log(customTeam)
-	      //   this.getCustomTeamPlayers(customTeam.id)	          
-	      // })
-	      this.setState({selectedPlayersAppear: !this.state.selectedPlayersAppear})
+	     this.setState({selectedPlayersAppear: !this.state.selectedPlayersAppear})
 		 })
 	}
 

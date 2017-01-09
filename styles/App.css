@@ -3,7 +3,7 @@
 .App {
   text-align: center;
   height:1000px;
-  background-image: url('http://s3.nikecdn.com/pass/NikeBasketball/LeBron_Poster.jpg');
+  background-image: url('https://i.ytimg.com/vi/n6S1JoCSVNU/maxresdefault.jpg');
   background-size:cover;
 }
 
@@ -56,6 +56,4 @@
   color:white;
 font-family: 'Montserrat', sans-serif;
   font-size:17px;
-
-
 }

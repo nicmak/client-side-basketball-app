@@ -299,12 +299,11 @@ logoutUser = () => {
               />
             : null
           }
-          <div
+          <footer
             className="BottomBar"
           >
           <h1 className="quote">I've failed over and over and over again in my life and that is why I succeed - Michael Jordan</h1>
-
-          </div>
+          </footer>
         </section>
       </MuiThemeProvider>
     );
