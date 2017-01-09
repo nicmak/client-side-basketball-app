@@ -9,7 +9,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../styles/App.css';
 import '../styles/background.css'
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import cookie from 'react-cookie';
 import jwtDecode from'jwt-decode';
 
 injectTapEventPlugin();
@@ -259,6 +258,7 @@ logoutUser = () => {
 
 
   render() {
+    
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
@@ -302,7 +302,8 @@ logoutUser = () => {
           <div
             className="BottomBar"
           >
-          
+          <h1 className="quote">I've failed over and over and over again in my life and that is why I succeed - Michael Jordan</h1>
+
           </div>
         </section>
       </MuiThemeProvider>

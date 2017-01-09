@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .App {
   text-align: center;
   height:1000px;
-  background-image: url("https://i.ytimg.com/vi/n6S1JoCSVNU/maxresdefault.jpg");
+  background-image: url('http://s3.nikecdn.com/pass/NikeBasketball/LeBron_Poster.jpg');
   background-size:cover;
 }
 
@@ -49,4 +51,11 @@
   top: 49%;
   border-top-style: solid;
   border-top-width: 10px; 
+}
+.quote {
+  color:white;
+font-family: 'Montserrat', sans-serif;
+  font-size:17px;
+
+
 }
