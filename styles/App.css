@@ -1,8 +1,8 @@
 .App {
   text-align: center;
-  background-color: grey;
   height:1000px;
-
+  background-image: url("https://i.ytimg.com/vi/n6S1JoCSVNU/maxresdefault.jpg");
+  background-size:cover;
 }
 
 .App-logo {
@@ -27,13 +27,12 @@
 }
 
 .Nav {
-  height: 100px;
-  background-color: brown;
+  height: 115px;
+  background-color: #111111
+;
   border-bottom-style: solid;
   border-bottom-width: 9px;
   margin-bottom: 23px;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
 }
 
 .Nav > div > div {
@@ -41,4 +40,13 @@
     height: 40px;
     margin-right: 15px;
     margin-top: 12px;
+}
+
+.BottomBar {
+  height: 12%;
+  background-color: #111;
+  position: relative;
+  top: 49%;
+  border-top-style: solid;
+  border-top-width: 10px; 
 }

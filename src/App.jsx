@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../styles/App.css';
+import '../styles/background.css'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import cookie from 'react-cookie';
 import jwtDecode from'jwt-decode';
@@ -107,6 +108,8 @@ class App extends Component {
     return player_id;
   }
 
+
+
   saveTeam = (teamName) => {
     if (this.state.selectedPlayers.length > 0 && teamName) {
     console.log("condition passed")
@@ -114,6 +117,7 @@ class App extends Component {
       players: this.selectPlayer_id(this.state.selectedPlayers),
       name: teamName
     }
+    
     let customTeamJSON = JSON.stringify(customTeam);
     console.log("customTeamJSON",customTeamJSON)
     fetch(`http://www.localhost:3000/custom_teams/new `, {
@@ -126,9 +130,10 @@ class App extends Component {
       cache: 'default',
       body: customTeamJSON,
     })
-    .then((response) => {
-      console.log("TeamSaved")
-    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+    });
    
    }
    else {
@@ -252,6 +257,7 @@ logoutUser = () => {
   }
 //--------------------------------------------------------------------
 
+
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
@@ -293,6 +299,11 @@ logoutUser = () => {
               />
             : null
           }
+          <div
+            className="BottomBar"
+          >
+          
+          </div>
         </section>
       </MuiThemeProvider>
     );

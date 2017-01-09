@@ -1,0 +1,25 @@
+.Customize {
+	/*position: relative;
+	right:36%;*/
+	float:left;
+}
+
+.Login {
+	float: left;
+	/*position: relative;
+    right: 74%;
+    bottom: 18%;*/
+}
+
+.Logout {
+	float:left;
+	/*position: relative !important;
+    top: 18% !important;
+    right: 15.8% !important;*/
+}
+.Register {
+	float:left;
+	  /*position: relative;
+    bottom: 74%;
+    right: 48%;*/
+}

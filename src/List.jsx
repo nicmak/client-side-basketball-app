@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import '../styles/Inventorybox.css';
-import {deepOrange500} from 'material-ui/styles/colors';
+import {deepOrange500, orange500} from 'material-ui/styles/colors';
 
 
 
@@ -27,6 +27,7 @@ export default class OneList extends Component {
             hintText="Custom Team #1"
             floatingLabelText="Please Enter Team Name"
             floatingLabelStyle={{color: deepOrange500}}
+            underlineFocusStyle={{borderColor:orange500}}
             onChange={this.props.handleTeamName}
          />
         <List>

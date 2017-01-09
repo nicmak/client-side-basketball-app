@@ -1,0 +1,13 @@
+.background {
+	background: #111; 
+}
+
+.playerText {
+	color: #909090;
+}
+
+.Menu {
+	display: inline-block;
+	margin: 16px 32px 16px 0
+}
+
