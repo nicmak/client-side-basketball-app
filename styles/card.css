@@ -12,8 +12,13 @@
 
 .logo {
   position: absolute;
-  width:8%;
-
+  width: 9%;
+  border-style: solid;
+  border-color: #111;
+}
+.image-background {
+  width: 435px;
+  height: 148px;
 }
 .cardheader {
   padding-left: 6px;

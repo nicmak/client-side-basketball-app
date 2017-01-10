@@ -7,10 +7,11 @@ import CustomTeamPlayers from './inventoryPageComponents/CustomTeamPlayers';
 import CustomTeamMenu from './inventoryPageComponents/CustomTeamMenu';
 import {Tabs,Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
+import '../styles/InventoryPage.css';
+
 
 
 import {Link} from 'react-router';
-import '../styles/InventoryPage.css';
 
 export default class InventoryPage extends Component {
 	constructor(props) {
@@ -121,13 +122,17 @@ export default class InventoryPage extends Component {
   render() {
     return (
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>	
-    	<section className="background">
-	      <Link to='/'>Home</Link>
-            <CustomTeamMenu
-              selectCustomTeam={this.selectCustomTeam}
-              customTeams={this.state.customTeams}
-            />
-          
+    	<section className="container">
+        <div className="Navbar">
+	        <Link to='/'>Home</Link>
+        </div>
+        <div className="CustomTeamMenu">
+          <CustomTeamMenu 
+            selectCustomTeam={this.selectCustomTeam}
+            customTeams={this.state.customTeams}
+          />
+        </div>
+        <div className="Body">
             <CustomTeamPlayers
               playerArray={this.state.playerArray}
               playerStatsArray={this.state.playerStatsArray}
@@ -136,7 +141,7 @@ export default class InventoryPage extends Component {
               getPlayerBoxscores={this.getPlayerBoxscores}
               playerStats={this.state.playerStats}
             />
-          
+        </div>
       </section>
     </MuiThemeProvider>
 

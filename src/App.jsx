@@ -41,6 +41,11 @@ class App extends Component {
       })
   }
 
+  emptyHeadShot = (playerObject) => {
+    if (playerObject.head_shot != null)
+      return playerObject;
+  }
+
   getPlayersFromTeam = (team_id) => {
     fetch(`http://www.localhost:3000/teams/${team_id}/players`)
       .then((response) => {
@@ -48,6 +53,7 @@ class App extends Component {
       })
       .then((player_json) => {
         console.log(`this are the players from ${team_id}`,player_json)
+        player_json = player_json.filter(this.emptyHeadShot)
         this.setState(
           {
             teamPlayers:player_json,
@@ -274,7 +280,7 @@ logoutUser = () => {
             currentUser={this.state.currentUser}
 
           />
-
+        <div className="Body">
           <DivisionCards
             onEastern={this.onEastern}
             onWestern={this.onWestern}
@@ -299,6 +305,7 @@ logoutUser = () => {
               />
             : null
           }
+          </div>
           <footer
             className="BottomBar"
           >

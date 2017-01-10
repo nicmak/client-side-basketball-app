@@ -1,14 +1,6 @@
 import React, {Component} from 'react';
-import '../../styles/InventoryPage.css';
-
-
-
-
-// const getPlayerStatsArrays = (playerStatsArrays) => {
-//   return playerStatsArrays.forEach((playerStatsArray) => {
-//      // stationComponents(playerStatsArray);
-//   })
-// }
+import {Tabs,Tab} from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
 
 const stationComponents = (playerStats = []) => {
   return playerStats.map((game,key)=> {
@@ -55,24 +47,51 @@ const stationComponents = (playerStats = []) => {
   });
 }
 
-export default class CustomPlayStats extends Component {
-  
- 
-  render() {
-// console.log("playerStatsArray on CustomPlayStats",this.props.playerStatsArray)
-  	return (
-      <div className="Stats">
-                  { 
-                    this.props.playerStats[0].player_id === this.props.player.id ?
-                    stationComponents(this.props.playerStats)
-                    :null
-                  }
-              </div>
-    
-
-  	)
+export default class CustomSwipeableview extends Component {
+	
+	constructor(props) {
+    super(props);
+    this.state = {
+      slideIndex: 0
+    }
   }
 
+  handleTab = (value) => {
+   this.setState({
+     slideIndex: value,
+   });
+  };
 
 
+
+  render() {
+  const player = this.props.player
+		
+    return (
+			<div>
+       <Tabs
+         onChange={this.handleTab}
+         value={this.state.slideIndex}
+       >
+         <Tab
+           label="Statistics"
+           value={0}
+         / >
+       </Tabs>
+       <SwipeableViews
+         index={this.state.slideIndex}
+         onChangeIndex={this.handleTab}
+       >
+         <div>
+         {
+            stationComponents(this.props.playerStats)
+         }
+         </div>
+
+       </SwipeableViews>
+      </div>
+     
+
+		)
+	}
 }

@@ -8,7 +8,7 @@ import '../../styles/InventoryPage.css';
 const MenuItems = (customTeams = [] , cb) => {
   return customTeams.map((customTeam, index) => {
     return (
-      <MenuItem
+      <MenuItem className="MenuItem"
         key={index}
         primaryText = {customTeam.name}
         onClick = {() => { cb(customTeam.name)}}
@@ -24,8 +24,8 @@ export default class CustomTeamMenu extends Component {
 		return (
 
       <div>
-        <Paper className="Menu">
-          <Menu>
+        <Paper>
+          <Menu className="Menu">
             {
               MenuItems(this.props.customTeams, this.props.selectCustomTeam)
             }

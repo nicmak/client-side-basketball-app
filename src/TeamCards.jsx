@@ -15,8 +15,10 @@ export default class TeamCards extends Component {
     const cards = this.props.teams.filter(this.checkDivision).map((team) => {
       return (
         <Card key={team.id} onClick={() => { this.props.getPlayersFromTeam(team.id) }} >
-          <img className="logo" src={team.logo}/>
-          <img role="presentation" src={team.background}/>
+          <div className="image-background">
+            <img className="logo" src={team.logo}/>
+            <img role="presentation" src={team.background}/>
+          </div>
           <CardMedia className ="cardmedia" overlay={<CardTitle title={team.location}/>}/>
           <CardActions>
             <FlatButton href={team.website} label="Website"/>
