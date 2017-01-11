@@ -18,6 +18,8 @@ class PlayerCards extends Component {
               getPlayerBoxscores={this.props.getPlayerBoxscores}
               playerStats={this.props.playerStats}
               getPlayerInfo={this.props.getPlayerInfo}
+              customTeams={this.props.customTeams}
+              addPlayerCustomTeams={this.props.addPlayerCustomTeams}
 
             />
           );
@@ -27,3 +29,5 @@ class PlayerCards extends Component {
   }
 }
 export default PlayerCards;
+
+

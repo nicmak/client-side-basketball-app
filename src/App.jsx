@@ -24,7 +24,8 @@ class App extends Component {
       Conference:true,
       teamPlayers: null,
       selectedPlayers: [],
-      userID: null
+      userID: null,
+      customTeams: []
 
       // selectedTeam:null
     };
@@ -40,6 +41,38 @@ class App extends Component {
         this.setState({teams})
       })
   }
+
+  getCustomTeams = () => {
+    fetch(`http://www.localhost:3000/custom_teams/`, {
+      method:'GET',
+      headers: {
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      }
+    })
+     .then((response) => response.json())
+     .then((responseJson) => {
+       let customTeams = responseJson
+       console.log(customTeams);
+       this.setState({customTeams})
+     })
+  }
+
+  addPlayerCustomTeams = (custom_team_id, player_id) => {
+    console.log("customid",custom_team_id,"playerid",player_id)
+    fetch(`http://www.localhost:3000/custom_teams/${custom_team_id}/${player_id}/add`, {
+      method:'PUT',
+      headers: {
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      }
+    })
+     .then((response) => response.json())
+     .then((responseJson) => {
+       console.log(responseJson);
+       
+     })
+  }
+
+  
 
   emptyHeadShot = (playerObject) => {
     if (playerObject.head_shot != null)
@@ -253,6 +286,7 @@ logoutUser = () => {
 
   componentDidMount() {
     this.getTeams()
+    this.getCustomTeams()
     let token = sessionStorage.getItem('token');
     let decoded = jwtDecode(token)
       console.log('decoded',decoded)
@@ -301,6 +335,8 @@ logoutUser = () => {
                 playersData={this.state.teamPlayers}
                 playerStats={this.state.playerStats}
                 teams={this.state.teams}
+                customTeams={this.state.customTeams}
+                addPlayerCustomTeams={this.addPlayerCustomTeams}
               />
             : null
           }
