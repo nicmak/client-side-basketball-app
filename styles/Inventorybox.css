@@ -17,12 +17,13 @@ div.Background > div > div {
 .playerBox > div {
   position: relative;
   left: 64px;
+  color:white;
 }
 .title {
-  position: relative;
+position: relative;
 left: 117px;
 width: 122px;
-color: black;
+color: white;
 bottom: 98px;
 }
 

@@ -119,7 +119,7 @@ export default class OneCard extends Component {
         </Card>
         <Snackbar className="SnackBar"
           open={this.state.open2}
-          autoHideDuration={1000}
+          autoHideDuration={500}
           message={`${player.first_name} ${player.last_name} was added`}
         />
       </div>

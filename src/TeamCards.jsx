@@ -22,7 +22,10 @@ export default class TeamCards extends Component {
           <CardMedia className ="cardmedia" overlay={<CardTitle title={team.location}/>}/>
           <div className="website">
             <FlatButton href={team.website} target="_blank" label="Website"/>
-          </div>        
+          </div>  
+          <div className="website">
+            <FlatButton href={team.twitter} target="_blank" label="Twitter"/>
+          </div>       
         </Card>
       );
     });

@@ -149,10 +149,7 @@ div.cardmedia > div > button {
   }
   .Table, td {
     padding-right: 28px;
-    padding-left: 0px;
+    padding-left: 20px;
   }
 
-  /*.SnackBar > div {
-    position: relative;
-    top: 400px;
-  }*/
+
