@@ -78,7 +78,7 @@ export default class OneSwipeableView extends Component {
             </div>
           </div>
           <div className="Stats">
-            <table className="Table">
+            <table className="Table" cellpadding="10">
               <tbody>
                 <tr>
                   <th>Game</th>

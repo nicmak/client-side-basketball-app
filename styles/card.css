@@ -138,8 +138,18 @@ div.cardmedia > div > button {
   }
 
   .Table {
-    padding: 13px 5px;
-    border-spacing: 7px 4px;
+    padding: 10px 5px;
+    border-spacing: 8px 6px;
+    margin-top:18px;
+  }
+
+  .Table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+  }
+  .Table, td {
+    padding-right: 28px;
+    padding-left: 0px;
   }
 
   /*.SnackBar > div {
