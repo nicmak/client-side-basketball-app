@@ -82,11 +82,7 @@ export default class InventoryBox extends React.Component {
             onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack();this.newList()}}
             label="Save"
           />   
-          
-
-          
-            
-            <OneList
+            <OneList className="players"
               selectedPlayers={this.props.selectedPlayers}
               deletePlayer={this.props.deletePlayer}
               handleTeamName={this.handleTeamName}

@@ -5,14 +5,19 @@ import Paper from 'material-ui/Paper';
 import '../../styles/InventoryPage.css';
 
 
-const MenuItems = (customTeams = [] , cb) => {
+const MenuItems = (customTeams = [] , cb, cb2) => {
   return customTeams.map((customTeam, index) => {
     return (
-      <MenuItem className="MenuItem"
-        key={index}
-        primaryText = {customTeam.name}
-        onClick = {() => { cb(customTeam.name)}}
-      />
+      <div>
+        <MenuItem className="MenuItem"
+          primaryText = {customTeam.name}
+          onClick = {() => { cb(customTeam.name)}}
+        />
+        <MenuItem className="MenuItem"
+          primaryText = {"Delete " + customTeam.name}
+          onClick = {() => { cb2(customTeam.id)}}
+        />
+      </div>
     )
   })
 }
@@ -27,7 +32,7 @@ export default class CustomTeamMenu extends Component {
         <Paper>
           <Menu className="Menu">
             {
-              MenuItems(this.props.customTeams, this.props.selectCustomTeam)
+              MenuItems(this.props.customTeams, this.props.selectCustomTeam, this.props.deleteCustomTeam)
             }
             
           </Menu>

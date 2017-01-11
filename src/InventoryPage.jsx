@@ -97,13 +97,6 @@ export default class InventoryPage extends Component {
         }
       })
     }
-
-     // let newState = this.state.playerArray
-     // if (newState.length ===0) {
-
-     // }
-
-
     fetch(`http://www.localhost:3000/custom_teams/${customTeam_id}/${player_id}/remove`, {
       method:'PUT',
       headers: {
@@ -115,9 +108,28 @@ export default class InventoryPage extends Component {
       let customTeam_id = (parseInt(responseJson.id))
       // this.getCustomTeamPlayers(customTeam_id)
     }) 
+  }
+
+  deleteCustomTeam = (customTeam_id) => {
+    this.setState({currentSelectedTeam:customTeam_id})
+      let newState = this.state.customTeams
+      newState.forEach((customTeam) => {
+        if (customTeam.id === customTeam_id) {
+          let position = newState.indexOf(customTeam)
+          newState.splice(position, 1)
+          this.setState({customTeams:newState})
+          this.setState({playerArray:[]})
+
+        }
+      })
+    fetch(`http://www.localhost:3000/custom_teams/${customTeam_id}/remove`, {
+      method:'PUT',
+      headers: {
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      }
+    })
   }     	
 	
-
 
   getPlayerInfo = (player_id) => {
     let playerArray = this.state.playerArray
@@ -162,6 +174,7 @@ export default class InventoryPage extends Component {
           <CustomTeamMenu 
             selectCustomTeam={this.selectCustomTeam}
             customTeams={this.state.customTeams}
+            deleteCustomTeam={this.deleteCustomTeam}
           />
         </div>
         <div className="Body">

@@ -22,6 +22,7 @@
     "react-slick": "^0.14.5",
     "react-swipeable-views": "^0.8.3",
     "react-tap-event-plugin": "^2.0.1",
+    "react-time": "^4.2.0",
     "react-viewport-slider": "0.0.9"
   },
   "scripts": {
