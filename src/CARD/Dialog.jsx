@@ -4,6 +4,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import OneSwipeableView from './SwipeableViews.jsx'
 import '../../styles/card.css';
+import {grey900} from 'material-ui/styles/colors';
+
 
 export default class OneDialog extends Component {
 
@@ -15,6 +17,7 @@ export default class OneDialog extends Component {
       team:""
     }
   }
+
 //--------------------------------------------------------------------
 
   checkTeams = () => {
@@ -37,8 +40,10 @@ export default class OneDialog extends Component {
       <FlatButton
         label="Cancel"
         onClick = {this.props.handler}
+        style={{color:'black'}}
       />,
       <FlatButton
+        style={{color:'black'}}
         label = "Add"
         onClick ={() => {this.props.handlerSnack;this.props.getPlayerInfo(player.id)}}
       />
@@ -47,11 +52,12 @@ export default class OneDialog extends Component {
     return (
       <Dialog key={key}
         className="views"
-        title={this.checkTeams()}
+        title={this.checkTeams().toUpperCase()}
         autoScrollBodyContent={true}
         modal={false}
         actions={actions}
         open={this.props.opener}
+        contentStyle={{width:'100%'}}
       >
         <OneSwipeableView
           player={this.props.player}

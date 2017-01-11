@@ -20,9 +20,9 @@ export default class TeamCards extends Component {
             <img role="presentation" src={team.background}/>
           </div>
           <CardMedia className ="cardmedia" overlay={<CardTitle title={team.location}/>}/>
-          <CardActions>
-            <FlatButton href={team.website} label="Website"/>
-          </CardActions>
+          <div className="website">
+            <FlatButton href={team.website} target="_blank" label="Website"/>
+          </div>        
         </Card>
       );
     });

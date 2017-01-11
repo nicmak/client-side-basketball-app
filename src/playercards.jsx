@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Slider from 'react-image-slider';
 import '../styles/image-slider.css';
 import OneCard from './CARD/card.jsx'
+import '../styles/TeamCards.css'
 
 class PlayerCards extends Component {
   render() {
@@ -9,7 +10,7 @@ class PlayerCards extends Component {
       <Slider>
         {this.props.playersData.map((player, key) => {
           return (
-            <OneCard
+            <OneCard className="teamCards"
               player={player}
               playerInfo={this.props.playerInfo}
               key={key}

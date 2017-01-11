@@ -6,8 +6,8 @@ import PlayerCards from './playercards.jsx'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import '../styles/App.css';
-import '../styles/background.css'
+// import '../styles/App.css';
+// import '../styles/background.css'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import jwtDecode from'jwt-decode';
 
@@ -268,7 +268,7 @@ logoutUser = () => {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
-          <Navbar 
+          <Navbar className="Navbar"
             selectedPlayers={this.state.selectedPlayers} 
             deletePlayer={this.deletePlayer}
             registerUser={this.registerUser}
@@ -287,7 +287,7 @@ logoutUser = () => {
           />
           {
             this.state.teamCardsAppear ?
-              <TeamCards
+              <TeamCards className="teamCards"
                 conferenceValue={this.state.Conference}
                 getPlayersFromTeam={this.getPlayersFromTeam}
                 teams={this.state.teams}
@@ -305,7 +305,7 @@ logoutUser = () => {
               />
             : null
           }
-          </div>
+        </div>
           <footer
             className="BottomBar"
           >

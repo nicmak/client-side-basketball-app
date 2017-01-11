@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Coda:800');
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+
 .teams {
   display: flex;
 
@@ -12,13 +16,14 @@
 
 .logo {
   position: absolute;
-  width: 9%;
+  width: 7.7%;
+  height:61%;
   border-style: solid;
   border-color: #111;
+  float:right;
 }
 .image-background {
-  width: 435px;
-  height: 148px;
+  width: 100%;
 }
 .cardheader {
   padding-left: 6px;
@@ -73,27 +78,26 @@ div.cardmedia > div > button {
   position: relative;
   right: 24px;
 }
+.Biology {
+  position: relative;
+  top: 133px;
+}
 
 .Biology > Img {
-  height: 135px;
-  border-style: solid;
-  border-radius: 2px;
-  border-color: black;
-  border-width: 6px;
-  position: relative;
+  height: 258px;
+  position: relative
  }
 .playerInfo {
-  border-style: solid;
-  border-radius: 2px;
-  border-color: black;
-  border-width: 6px;
-  padding: 7px;
-  width: 515px;
   position: relative;
-  left: 192px;
-  bottom: 151px;
-  font-size: 16px;
-  height: 11px;
+      left: 361px;
+    bottom: 332px;
+    font-size: 29px;
+    font-weight: 700;
+    height: 11px;
+  color: black;
+  font-family: 'Abel', sans-serif !important;
+
+
   }
 
   .views > div > div > div > div {
@@ -101,7 +105,42 @@ div.cardmedia > div > button {
     /*overflow: hidden;*/
   }
 
-  
+  .views > div > div > div {
+    background-color: white !important
+  }
+
+
+
+
+  .views > div > div > div >h3 {
+    font-size: 41px !important;
+    color:#111 !important;
+    font-family: 'Coda', cursive;
+
+  }
+
+  .buttons {
+    border-style: solid;
+    border-color: #111;
+    border-width: 4px;
+    margin-top: -4px;
+  }
+
+  .website {
+    border-style: solid;
+    border-color: #111;
+    border-width: 4px;
+    margin-top: -3px;
+  }
+
+  .Stats {
+    color:black;
+  }
+
+  .Table {
+    padding: 13px 5px;
+    border-spacing: 7px 4px;
+  }
 
   /*.SnackBar > div {
     position: relative;

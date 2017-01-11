@@ -45,6 +45,7 @@ export default class OneCard extends Component {
                 title ={`${player.first_name} ${player.last_name}`}
               />}
           />
+          <div className="buttons">
           <FlatButton
             onClick={() =>{this.props.getPlayerInfo(player.id); this.handlerSnack()}}
             className="FlatButton"
@@ -54,6 +55,7 @@ export default class OneCard extends Component {
             onClick={(event) => {this.handler(); this.props.getPlayerBoxscores(player.id);}}
             label="Statistics"
           />
+          </div>
 
           <OneDialog
             teams={this.props.teams}
