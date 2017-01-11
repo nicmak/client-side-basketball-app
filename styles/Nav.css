@@ -1,0 +1,43 @@
+.Customize {
+	/*position: relative;
+	right:36%;*/
+	float:left;
+}
+
+.Login {
+	float: left;
+	/*position: relative;
+    right: 74%;
+    bottom: 18%;*/
+}
+
+.Logout {
+	float:left;
+	/*position: relative !important;
+    top: 18% !important;
+    right: 15.8% !important;*/
+}
+.Register {
+	float:left;
+	  /*position: relative;
+    bottom: 74%;
+    right: 48%;*/
+}
+
+.Title {
+  color: orange;
+    font-size: 34px;
+    position: relative;
+    top: 38px;
+    left: 34px;
+    margin: 0px;
+    width: 18%;
+    margin-left: 547px;
+
+}
+.userName {
+	    position: relative;
+    bottom: 23px;
+    right: 569px;
+    color: orange;
+}

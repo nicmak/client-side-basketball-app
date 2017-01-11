@@ -3,7 +3,24 @@ import {Card, CardMedia,CardTitle} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import OneDialog from './Dialog.jsx';
 import Snackbar from 'material-ui/Snackbar';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 import '../../styles/card.css';
+
+const MenuItems = (customTeams = [], cb, player_id) => {
+  return customTeams.map((customTeam, index) => {
+    return (
+      <MenuItem 
+        key={index}
+        primaryText = {customTeam.name}
+        onClick={() => {cb(customTeam.id, player_id)}}
+      />
+    )
+  })
+                // MenuItems(this.props.customTeams, this.props.addPlayerCustomTeams,player.id)
+
+}
 
 export default class OneCard extends Component {
   constructor(props) {
@@ -11,7 +28,8 @@ export default class OneCard extends Component {
     this.state = {
       open:false,
       open2:false,
-      slideIndex: 0
+      slideIndex: 0,
+      MenuOpen:false
     }
   }
   handler = () => {
@@ -31,6 +49,17 @@ export default class OneCard extends Component {
    });
   };
 
+  handlerForPopover = () => {
+    this.setState({
+      MenuOpen: !this.state.MenuOpen
+    })
+  }
+  handleRequestCloseForPopover = () => {
+    this.setState({
+      MenuOpen: false,
+    });
+  };
+
   render() {
     const player = this.props.player
     const key = this.props.key
@@ -45,15 +74,37 @@ export default class OneCard extends Component {
                 title ={`${player.first_name} ${player.last_name}`}
               />}
           />
+          <div className="buttons">
+          
           <FlatButton
-            onClick={() =>{this.props.getPlayerInfo(player.id); this.handlerSnack()}}
+            onClick={(event) => {this.handlerForPopover()}}
+            label="ADD"
             className="FlatButton"
-            label="Add"
+
           />
+          <Popover
+            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+            open={this.state.MenuOpen}
+            onRequestClose={this.handleRequestCloseForPopover}  
+          >
+           <Menu>
+            <MenuItem
+              onClick={() =>{this.props.getPlayerInfo(player.id); this.handlerSnack()}}
+              primaryText="Add to Inventory"
+            />
+            {
+              MenuItems(this.props.customTeams, this.props.addPlayerCustomTeams,player.id)
+            }
+           </Menu>
+          </Popover>
+
+
           <FlatButton
             onClick={(event) => {this.handler(); this.props.getPlayerBoxscores(player.id);}}
             label="Statistics"
           />
+          </div>
 
           <OneDialog
             teams={this.props.teams}
@@ -68,8 +119,8 @@ export default class OneCard extends Component {
         </Card>
         <Snackbar className="SnackBar"
           open={this.state.open2}
-          autoHideDuration={3000}
-          message={`${player.first_name} ${player.last_name} was added to Inventory`}
+          autoHideDuration={1000}
+          message={`${player.first_name} ${player.last_name} was added`}
         />
       </div>
     )

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import '../../styles/card.css';
+import {red900} from 'material-ui/styles/colors';
+
 
 const stationComponents = (playerStats = []) => {
   return playerStats.map((game)=> {
@@ -49,22 +51,17 @@ export default class OneSwipeableView extends Component {
         <Tabs className="tabs"
           onChange = {this.handleTab}
           value = {this.state.slideIndex}
-          contentContainerStyle={{background: 'red'}}
         >
           <Tab
-            style={{color:"red"}}
-            label="BIO" value={0}
+            style={{color:"Black", backgroundColor:red900}}
+            label="PROFILE" value={0}
           />
           <Tab
-            style={{color:"red"}}
-            label="Statistics"
+            style={{color:"Black", backgroundColor:red900}}
+            label="STATISTICS"
             value={1}
           />
-          <Tab
-            style={{color:"red"}}
-            label="Other"
-            value={2}
-          />
+          
         </Tabs>
         <SwipeableViews className="views"
           index={this.state.slideIndex}
@@ -75,13 +72,13 @@ export default class OneSwipeableView extends Component {
             <div className="playerInfo">
               Name: {`${player.first_name} ${player.last_name}`}<br/><br/>
               Position: {player.position}<br/><br/>
-              {/* College: {player.college}<br/><br/> */}
-              {/* Height: {player.height}<br/><br/> */}
-              {/* Weight: {player.weight} */}
+              College: {player.college}<br/><br/>
+              Height: {player.height} (FT- INCH)<br/><br/> 
+              Weight: {player.weight} LBS
             </div>
           </div>
           <div className="Stats">
-            <table>
+            <table className="Table" cellpadding="10">
               <tbody>
                 <tr>
                   <th>Game</th>

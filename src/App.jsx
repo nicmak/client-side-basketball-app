@@ -6,9 +6,9 @@ import PlayerCards from './playercards.jsx'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import '../styles/App.css';
+// import '../styles/App.css';
+// import '../styles/background.css'
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import cookie from 'react-cookie';
 import jwtDecode from'jwt-decode';
 
 injectTapEventPlugin();
@@ -24,7 +24,8 @@ class App extends Component {
       Conference:true,
       teamPlayers: null,
       selectedPlayers: [],
-      userID: null
+      userID: null,
+      customTeams: []
 
       // selectedTeam:null
     };
@@ -41,6 +42,43 @@ class App extends Component {
       })
   }
 
+  getCustomTeams = () => {
+    fetch(`http://www.localhost:3000/custom_teams/`, {
+      method:'GET',
+      headers: {
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      }
+    })
+     .then((response) => response.json())
+     .then((responseJson) => {
+       let customTeams = responseJson
+       console.log(customTeams);
+       this.setState({customTeams})
+     })
+  }
+
+  addPlayerCustomTeams = (custom_team_id, player_id) => {
+    console.log("customid",custom_team_id,"playerid",player_id)
+    fetch(`http://www.localhost:3000/custom_teams/${custom_team_id}/${player_id}/add`, {
+      method:'PUT',
+      headers: {
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      }
+    })
+     .then((response) => response.json())
+     .then((responseJson) => {
+       console.log(responseJson);
+
+     })
+  }
+
+
+
+  emptyHeadShot = (playerObject) => {
+    if (playerObject.head_shot != null)
+      return playerObject;
+  }
+
   getPlayersFromTeam = (team_id) => {
     fetch(`http://www.localhost:3000/teams/${team_id}/players`)
       .then((response) => {
@@ -48,6 +86,7 @@ class App extends Component {
       })
       .then((player_json) => {
         console.log(`this are the players from ${team_id}`,player_json)
+        player_json = player_json.filter(this.emptyHeadShot)
         this.setState(
           {
             teamPlayers:player_json,
@@ -107,6 +146,8 @@ class App extends Component {
     return player_id;
   }
 
+
+
   saveTeam = (teamName) => {
     if (this.state.selectedPlayers.length > 0 && teamName) {
     console.log("condition passed")
@@ -114,6 +155,7 @@ class App extends Component {
       players: this.selectPlayer_id(this.state.selectedPlayers),
       name: teamName
     }
+
     let customTeamJSON = JSON.stringify(customTeam);
     console.log("customTeamJSON",customTeamJSON)
     fetch(`http://www.localhost:3000/custom_teams/new `, {
@@ -126,9 +168,10 @@ class App extends Component {
       cache: 'default',
       body: customTeamJSON,
     })
-    .then((response) => {
-      console.log("TeamSaved")
-    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+    });
 
    }
    else {
@@ -187,7 +230,6 @@ loginUser = (email,password) => {
       mode: 'cors',
       headers: {
         "Content-Type" : "application/json",
-        // "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
       },
       cache: 'default',
       body: userInfoJSON,
@@ -244,6 +286,7 @@ logoutUser = () => {
 
   componentDidMount() {
     this.getTeams()
+    this.getCustomTeams()
     let token = sessionStorage.getItem('token');
     let decoded = jwtDecode(token)
       console.log('decoded',decoded)
@@ -252,11 +295,13 @@ logoutUser = () => {
   }
 //--------------------------------------------------------------------
 
+
   render() {
+
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <section className="App">
-          <Navbar
+          <Navbar className="Navbar"
             selectedPlayers={this.state.selectedPlayers}
             deletePlayer={this.deletePlayer}
             registerUser={this.registerUser}
@@ -268,14 +313,14 @@ logoutUser = () => {
             currentUser={this.state.currentUser}
 
           />
-
+        <div className="Body">
           <DivisionCards
             onEastern={this.onEastern}
             onWestern={this.onWestern}
           />
           {
             this.state.teamCardsAppear ?
-              <TeamCards
+              <TeamCards className="teamCards"
                 conferenceValue={this.state.Conference}
                 getPlayersFromTeam={this.getPlayersFromTeam}
                 teams={this.state.teams}
@@ -290,9 +335,17 @@ logoutUser = () => {
                 playersData={this.state.teamPlayers}
                 playerStats={this.state.playerStats}
                 teams={this.state.teams}
+                customTeams={this.state.customTeams}
+                addPlayerCustomTeams={this.addPlayerCustomTeams}
               />
             : null
           }
+        </div>
+          <footer
+            className="BottomBar"
+          >
+          <h1 className="quote">I've failed over and over and over again in my life and that is why I succeed - Michael Jordan</h1>
+          </footer>
         </section>
       </MuiThemeProvider>
     );

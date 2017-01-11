@@ -41,48 +41,56 @@ export default class InventoryBox extends React.Component {
   handleTeamName = (event) => {
     this.setState({teamName:event.target.value})
   }  
+
+  makeTabs = () => {
+    // let jsx = `<Tab
+    //               style={{color:"red"}}
+    //               label="Team2" value={1}
+    //            />`
+    // return jsx;
+    console.log("Maketabs")
+  }
+
+  newList = () => {
+    this.makeTabs
+  }
 //--------------------------------------------------------------------
   render() {
     return (
        <div>
-         <RaisedButton
-           onClick={this.handleToggle}
-           label="Inventory"
-         />
+         <div className="InventoryButton">
+           <FlatButton
+             onClick={this.handleToggle}
+             label="Inventory"
+           />
+         </div>
         <Drawer
           className="Background"
           width={400}
           openSecondary={true}
           open={this.state.open}
         >
-          <AppBar title="User's Inventory"/>
+          <AppBar 
+            title={this.props.currentUser}
+            className="AppBar"
+          />
           <FlatButton
             onClick={this.handleToggle}
             label="Close"
           />
           <FlatButton
-            onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack();}}
+            onClick={() => {this.props.saveTeam(this.state.teamName);this.handlerSnack();this.newList()}}
             label="Save"
           />   
-          <Tabs className="tabs">
-            <Tab
-              style={{color:"red"}}
-              label="BIO" value={0}
-            />
-            </Tabs>
+          
 
-          <SwipeableViews 
-            className="views"
-            index={this.state.slideIndex}
-            onChangeIndex={this.handleTab}
-          >
+          
             
             <OneList
               selectedPlayers={this.props.selectedPlayers}
               deletePlayer={this.props.deletePlayer}
               handleTeamName={this.handleTeamName}
             />   
-          </SwipeableViews>
          
         </Drawer>
         <Snackbar className="SnackbarInventory"

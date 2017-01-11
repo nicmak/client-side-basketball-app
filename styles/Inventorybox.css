@@ -1,13 +1,17 @@
 .InventoryButton {
-  background-color: black;
+}
+
+.AppBar {
+  background-color: rgba(194, 19, 21, 0.89) !important;
+  
 }
 
 .Background > div {
-  background-color: brown !important;
+background-color: rgba(17, 17, 17, 0.79) !important;
 }
 
 div.Background > div > div {
-  background-color: brown !important;
+  
 }
 
 .playerBox > div {
@@ -31,8 +35,9 @@ bottom: 98px;
 }
 
 .CustomTeam {
-      top: 0px;
-    width: 371px !important
+      /*top: 0px;
+    width: 371px !important*/
+    background-color: rgba(17, 17, 17, 0.79) !important;
 }
 
 .SnackBarInventory {
