@@ -12,7 +12,14 @@ class Navbar extends Component {
     return (
 
       <div className="Nav">
-      {this.props.currentUser}
+      <div className="Title">THE BIG O'</div>
+      {
+      sessionStorage.getItem('token')?
+      <div className="userName">Welcome: {this.props.currentUser}</div>
+      :null
+      }
+        
+
         <InventoryBox 
           selectedPlayers={this.props.selectedPlayers}
           deletePlayer={this.props.deletePlayer}

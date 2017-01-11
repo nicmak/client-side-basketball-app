@@ -197,7 +197,6 @@ loginUser = (email,password) => {
       mode: 'cors',
       headers: {
         "Content-Type" : "application/json",
-        // "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
       },      
       cache: 'default',
       body: userInfoJSON,

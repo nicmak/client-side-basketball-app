@@ -8,9 +8,6 @@ import CustomTeamMenu from './inventoryPageComponents/CustomTeamMenu';
 import {Tabs,Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import '../styles/InventoryPage.css';
-
-
-
 import {Link} from 'react-router';
 
 export default class InventoryPage extends Component {
@@ -23,13 +20,13 @@ export default class InventoryPage extends Component {
     	selectedPlayersAppear: false,
       playerArray: [],
       playerStatsArray: [],
-      playerStats: [{player_id:0}]
+      playerStats: [{player_id:0}],
+      customTeams: []
     };
 	}
 
-	
-
 	getCustomTeams = () => {
+    
     fetch(`http://www.localhost:3000/custom_teams/`, {
     	method:'GET',
     	headers: {
@@ -40,10 +37,10 @@ export default class InventoryPage extends Component {
 		 .then((responseJson) => {
 	     let customTeams = responseJson
        this.setState({customTeams})
+       console.log(this.state.customTeams)
 	     this.setState({selectedPlayersAppear: !this.state.selectedPlayersAppear})
 		 })
 	}
-
   selectCustomTeam = (selectedName) => {
     this.setState({playerArray:[]})
     this.setState({playerStatsArray:[]})
@@ -51,12 +48,11 @@ export default class InventoryPage extends Component {
     customTeamsArray.forEach((customTeam) => {
       if (customTeam.name === selectedName) {
         this.getCustomTeamPlayers(customTeam.id);
+        this.setState({customTeamID:customTeam.id})
         
       }
     })
   } 
-
-
 	getCustomTeamPlayers = (customTeam_id) => {
     fetch(`http://www.localhost:3000/custom_teams/${customTeam_id}/players`, {
     	method:'GET',
@@ -69,18 +65,61 @@ export default class InventoryPage extends Component {
 	     // console.log('getCustomTeamPlayers', responseJson)
 	     let customTeamPlayersIDs = responseJson
        this.setState({customTeamPlayersIDs})
+       console.log('customTeamPlayersIDs',customTeamPlayersIDs)
        // console.log(this.state.customTeamPlayersIDs)
 
 	     customTeamPlayersIDs.forEach((player) => {
 	     	let id = player.player_id;
 	     	this.getPlayerInfo(id)
-
-
 	     })
 		 })
 	}
-	     	
-	getPlayerInfo = (player_id) => {
+
+  deleteCustomTeamPlayer = (customTeam_id,player_id) => {
+    console.log("All",this.state)
+    let newState = this.state.playerArray
+     newState.forEach((existPlayer) => {
+      if (existPlayer.id === player_id ) {
+        let position = newState.indexOf(existPlayer)
+        newState.splice(position,1)
+        this.setState({playerArray:newState})
+      }
+     })
+
+    this.setState({currentSelectedTeam:customTeam_id})
+    if (this.state.playerArray.length === 0) {
+      let newState = this.state.customTeams
+      newState.forEach((customTeam) => {
+        if (customTeam.id === customTeam_id) {
+          let position = newState.indexOf(customTeam)
+          newState.splice(position, 1)
+          this.setState({customTeams:newState})
+        }
+      })
+    }
+
+     // let newState = this.state.playerArray
+     // if (newState.length ===0) {
+
+     // }
+
+
+    fetch(`http://www.localhost:3000/custom_teams/${customTeam_id}/${player_id}/remove`, {
+      method:'PUT',
+      headers: {
+        "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
+      }
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      let customTeam_id = (parseInt(responseJson.id))
+      // this.getCustomTeamPlayers(customTeam_id)
+    }) 
+  }     	
+	
+
+
+  getPlayerInfo = (player_id) => {
     let playerArray = this.state.playerArray
     fetch(`http://www.localhost:3000/players/${player_id}`)
       .then((response) => {
@@ -109,16 +148,9 @@ export default class InventoryPage extends Component {
         // console.log("playerStatsArray",this.state.playerStatsArray)
       })
     }
-	
-
   componentDidMount() {
 		this.getCustomTeams()	  
 	}
-
-  
-
-  
-
   render() {
     return (
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>	
@@ -140,14 +172,14 @@ export default class InventoryPage extends Component {
               selectedPlayersAppear={this.state.selectedPlayersAppear}
               getPlayerBoxscores={this.getPlayerBoxscores}
               playerStats={this.state.playerStats}
+              deleteCustomTeamPlayer={this.deleteCustomTeamPlayer}
+              customTeamID={this.state.customTeamID}
             />
         </div>
+        <div className="Footer"></div>
       </section>
     </MuiThemeProvider>
 
     )
   }
 }
-
-
-

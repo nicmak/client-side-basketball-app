@@ -25,6 +25,7 @@ export default class CustomTeamPlayers extends Component {
 
 
   render () {
+  	console.log(this.props.customTeamID)
 		return (
 			<div>
 			{
@@ -44,6 +45,10 @@ export default class CustomTeamPlayers extends Component {
 	              <FlatButton
 	              label="Statistics"
                 onClick={() => {this.props.getPlayerBoxscores(player.id);this.handlerForStats()}}
+                />
+                <FlatButton
+	              label="Remove"
+                onClick={() => {this.props.deleteCustomTeamPlayer(this.props.customTeamID,player.id)}}
                 />
               </div>
               <CustomDialog
