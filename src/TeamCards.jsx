@@ -23,7 +23,7 @@ export default class TeamCards extends Component {
           <div className="website">
             <FlatButton href={team.website} target="_blank" label="Website"/>
             <FlatButton href={team.twitter} target="_blank" label="Twitter"/>
-          </div>  
+          </div>
         </Card>
       );
     });

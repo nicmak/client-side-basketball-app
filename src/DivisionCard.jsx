@@ -9,14 +9,14 @@ export default class DivisionCards extends Component {
     return (
       <section className="divisions">
         <div className="division" onClick={this.props.onWestern} >
-          <Card>
+          <Card style={{backgroundColor: 'rgba(48, 48, 48, 0)'}} >
             <CardMedia>
               <img role="presentation" src="https://upload.wikimedia.org/wikipedia/en/0/02/Western_Conference_(NBA)_logo.gif"/>
             </CardMedia>
           </Card>
         </div>
         <div className="division" onClick={this.props.onEastern}>
-          <Card>
+          <Card style={{backgroundColor: 'rgba(48, 48, 48, 0)'}} >
             <CardMedia>
               <img role="presentation" src="https://upload.wikimedia.org/wikipedia/en/e/ed/Eastern_Conference_(NBA)_logo.gif"/>
             </CardMedia>

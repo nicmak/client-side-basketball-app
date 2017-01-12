@@ -11,7 +11,7 @@ import '../../styles/card.css';
 const MenuItems = (customTeams = [], cb, player_id) => {
   return customTeams.map((customTeam, index) => {
     return (
-      <MenuItem 
+      <MenuItem
         key={index}
         primaryText = {customTeam.name}
         onClick={() => {cb(customTeam.id, player_id)}}
@@ -74,7 +74,7 @@ export default class OneCard extends Component {
               />}
           />
           <div className="buttons">
-          
+
           <FlatButton
             onClick={(event) => {this.handlerForPopover()}}
             label="ADD"
@@ -88,7 +88,7 @@ export default class OneCard extends Component {
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
             open={this.state.MenuOpen}
-            onRequestClose={this.handleRequestCloseForPopover}  
+            onRequestClose={this.handleRequestCloseForPopover}
           >
            <Menu>
             <MenuItem
@@ -102,7 +102,7 @@ export default class OneCard extends Component {
           </Popover>
 
 
-          
+
           </div>
 
           <OneDialog
