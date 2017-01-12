@@ -101,7 +101,7 @@ export default class OneSwipeableView extends Component {
 
   render() {
     const player = this.props.player
-    const key = this.props.key
+    // const key = this.props.key
     return (
       <div>
         <Tabs className="tabs"

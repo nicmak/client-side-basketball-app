@@ -52,7 +52,7 @@ export default class OneDialog extends Component {
     return (
       <Dialog key={key}
         className="views"
-        title={this.checkTeams().toUpperCase()}
+        title={`${this.checkTeams().toUpperCase()} - ${this.props.player.first_name} ${this.props.player.last_name}`}
         autoScrollBodyContent={true}
         modal={false}
         actions={actions}

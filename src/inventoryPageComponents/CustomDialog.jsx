@@ -19,9 +19,9 @@ export default class CustomDialog extends Component {
 	        onClick = {this.props.handlerForStats}
 	      />
 	      ]
-		
+
 		return (
-	  
+
 	    <Dialog
 	      className="dialog-view"
 	      title="Statistics"
