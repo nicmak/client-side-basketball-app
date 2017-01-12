@@ -26,6 +26,7 @@ class Navbar extends Component {
         <div className="Login">
           <Login 
             loginUser={this.props.loginUser}
+            LoginError={this.props.LoginError}
           />
         </div>
         {
@@ -47,6 +48,8 @@ class Navbar extends Component {
         <div className="Register">
           <Registration 
             registerUser={this.props.registerUser}
+            RegisterError={this.props.RegisterError}
+
           />
         </div>
         

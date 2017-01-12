@@ -39,7 +39,7 @@ export default class CustomTeamPlayers extends Component {
 	            />
 	            <div className="playerText">
 	              {
-		              `Name: ${player.first_name} ${player.last_name}
+		              `${player.first_name} ${player.last_name}
 		              Position: ${player.position}`
 	              } 
 	              <FlatButton

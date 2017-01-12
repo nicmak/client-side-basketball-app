@@ -59,7 +59,7 @@ export default class Login extends Component {
         />
         <Dialog
           className="Login"
-          title="Login Page"
+          title="Login"
           autoScrollBodyContent={true}
           modal={false}
           actions={actions}
@@ -67,6 +67,7 @@ export default class Login extends Component {
         >
           <TextField
             hintText="Email Address"
+            errorText="Hello"
             floatingLabelText="Email Address"
             type="email"
             onChange={this.emailChange}

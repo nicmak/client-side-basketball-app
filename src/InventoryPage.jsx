@@ -42,9 +42,13 @@ export default class InventoryPage extends Component {
 		 })
 	}
   selectCustomTeam = (selectedName) => {
-    this.setState({playerArray:[]})
-    this.setState({playerStatsArray:[]})
+    this.setState({
+      playerArray:[],
+      playerStatsArray:[]
+    })
+
     let customTeamsArray = this.state.customTeams
+    
     customTeamsArray.forEach((customTeam) => {
       if (customTeam.name === selectedName) {
         this.getCustomTeamPlayers(customTeam.id);

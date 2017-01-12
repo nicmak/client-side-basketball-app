@@ -7,7 +7,7 @@ import '../styles/index.css';
 import Blank from './Blank.jsx'
 
 export default (
-  <Route path="/" component={Blank}>
+  <Route path="/">
       <IndexRoute component={App}/>
       <Route path='Inventory' component={InventoryPage}/>
   </Route>

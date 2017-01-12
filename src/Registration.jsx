@@ -70,6 +70,7 @@ export default class Registration extends Component {
         >
           <TextField
             hintText="Email Address"
+            errorText={this.props.RegisterError}
             floatingLabelText="Email Address"
             type="email"
             onChange={this.emailChange}

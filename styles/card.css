@@ -9,15 +9,15 @@
 .team {
   margin:6px;
   border-style: outset;
-  border-color: black;
-  border-width: 8px;
+/*  border-color: black;
+*/  border-width: 8px;
   border-radius: 8px;
 }
 
 .logo {
   position: absolute;
-  width: 4.7%;
-  height: 28%;
+  width: 6.7%;
+  height: 46%;
   border-style: solid;
   border-color: #111;
   float:right;
@@ -123,15 +123,15 @@ div.cardmedia > div > button {
   }
 
   .buttons {
-    border-style: solid;
-    border-color: #111;
+/*    border-style: solid;
+*/    border-color: #111;
     border-width: 4px;
     margin-top: -4px;
   }
 
   .website {
-    border-style: solid;
-    border-color: #111;
+/*    border-style: solid;
+*/    border-color: #111;
     border-width: 4px;
     margin-top: -3px;
   }

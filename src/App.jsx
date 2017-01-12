@@ -211,11 +211,20 @@ registerUser = (email, password) => {
       cache: 'default',
       body: userInfoJSON,
     })
+    .then(response => {
+      if (response.status >= 400) {
+        throw new Error('')
+      }
+      return response
+    })
     .then((response) => response.json())
     .then((responseJson) => {
       console.log("responsejson",responseJson)
       sessionStorage.setItem('token',responseJson.token);
       console.log("Stored in SessionStorage");
+    })
+    .catch((err) => {
+      this.setState({RegisterError:"Email already exists"})
     })
       //The response coming back from the server will be a User ID
       // console.log("response",response.json)
@@ -244,11 +253,20 @@ loginUser = (email,password) => {
       cache: 'default',
       body: userInfoJSON,
     })
+    .then(response => {
+      if (response.status >= 400) {
+        throw new Error("Wrong Password")
+      }
+      return response
+    })
     .then((response) => response.json())
     .then((responseJson) => {
       console.log("responsejson",responseJson)
       sessionStorage.setItem('token',responseJson.token);
       console.log("Stored");
+    })
+    .catch((err) => {
+      this.setState({LoginError:"Incorrect Login Information"})
     })
   }
    
@@ -321,6 +339,8 @@ logoutUser = () => {
             teamNameSnack={this.state.teamName}
             saveTeam={this.saveTeam}
             currentUser={this.state.currentUser}
+            LoginError={this.state.LoginError}
+            RegisterError={this.state.RegisterError}
 
           />
         <div className="Body">
