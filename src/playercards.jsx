@@ -8,12 +8,13 @@ class PlayerCards extends Component {
   render() {
     return (
       <Slider>
-        {this.props.playersData.map((player, key) => {
+        {this.props.playersData.map((player, index) => {
           return (
             <OneCard className="teamCards"
+              key={index}
+
               player={player}
               playerInfo={this.props.playerInfo}
-              key={key}
               teams={this.props.teams}
               getPlayerBoxscores={this.props.getPlayerBoxscores}
               playerStats={this.props.playerStats}

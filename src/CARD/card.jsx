@@ -62,11 +62,10 @@ export default class OneCard extends Component {
 
   render() {
     const player = this.props.player
-    const key = this.props.key
 
     return (
       <div>
-        <Card key={key}>
+        <Card>
           <img role="presentation" src={player.head_shot}/>
           <CardMedia className ="cardmedia2"
             overlay={

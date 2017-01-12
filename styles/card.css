@@ -16,8 +16,8 @@
 
 .logo {
   position: absolute;
-  width: 7.7%;
-  height:61%;
+  width: 4.7%;
+  height: 28%;
   border-style: solid;
   border-color: #111;
   float:right;
@@ -66,11 +66,13 @@ div.cardmedia > div > button {
 
 }
 
+.division > div >div >div {
+  background-color: rgba(231, 215, 215, 0) !important;
+}
+
 .division {
-  width: 229px;
-  border-style: solid;
-  border-width: 5px;
-  border-radius: 7px;
+  width: 312px;
+  
 }
 .tabs > div {
   width: 107% !important;
@@ -79,8 +81,9 @@ div.cardmedia > div > button {
   right: 24px;
 }
 .Biology {
-  position: relative;
-  top: 133px;
+    position: relative;
+    top: 247px;
+    left: 19px;
 }
 
 .Biology > Img {
@@ -89,7 +92,7 @@ div.cardmedia > div > button {
  }
 .playerInfo {
   position: relative;
-      left: 361px;
+      left: 407px;
     bottom: 332px;
     font-size: 29px;
     font-weight: 700;
