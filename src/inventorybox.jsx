@@ -57,8 +57,8 @@ export default class InventoryBox extends React.Component {
 //--------------------------------------------------------------------
   render() {
     return (
-       <div>
-         <div className="InventoryButton">
+       <div className="InventoryButton">
+         <div >
            <FlatButton
              onClick={this.handleToggle}
              label="Inventory"

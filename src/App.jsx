@@ -7,7 +7,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import '../styles/App.css';
-// import '../styles/background.css'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import jwtDecode from'jwt-decode';
 
@@ -49,11 +48,22 @@ class App extends Component {
         "Authorization" : `Bearer ${sessionStorage.getItem('token')} `
       }
     })
+     .then(response => {
+      if (response.status >= 400) {
+        throw new Error('la;sdkfj')
+      }
+      return response
+
+     })
      .then((response) => response.json())
      .then((responseJson) => {
+       
        let customTeams = responseJson
        console.log(customTeams);
        this.setState({customTeams})
+     })
+     .catch((err) => {
+       console.log("There's an error")
      })
   }
 
@@ -341,11 +351,16 @@ logoutUser = () => {
             : null
           }
         </div>
-          <footer
+        <footer
             className="BottomBar"
-          >
-          <h1 className="quote">I've failed over and over and over again in my life and that is why I succeed - Michael Jordan</h1>
-          </footer>
+        >
+          {
+            sessionStorage.getItem('token')?
+            <div className="userName">Welcome: {this.state.currentUser}</div>
+            :null
+          }
+          
+        </footer>
         </section>
       </MuiThemeProvider>
     );

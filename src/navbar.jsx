@@ -13,13 +13,6 @@ class Navbar extends Component {
 
       <div className="Nav">
       <div className="Title">THE BIG O'</div>
-      {
-      sessionStorage.getItem('token')?
-      <div className="userName">Welcome: {this.props.currentUser}</div>
-      :null
-      }
-        
-
         <InventoryBox 
           selectedPlayers={this.props.selectedPlayers}
           deletePlayer={this.props.deletePlayer}
@@ -29,18 +22,22 @@ class Navbar extends Component {
           currentUser={this.props.currentUser}
 
          />
-      <section className="buttons">
+      <section className="Nav-buttons">
         <div className="Login">
           <Login 
             loginUser={this.props.loginUser}
           />
         </div>
-        <div className="Logout">
-          <FlatButton className="Logout"
-            onClick={this.props.logoutUser}
-            label="Logout"
-          />
-        </div>
+        {
+          sessionStorage.getItem('token')?
+          <div className="Logout">
+            <FlatButton className="Logout"
+              onClick={this.props.logoutUser}
+              label="Logout"
+            />
+          </div>
+          :null
+        }
         <div className="Customize">
           <FlatButton 
             label="Customize"
@@ -52,6 +49,7 @@ class Navbar extends Component {
             registerUser={this.props.registerUser}
           />
         </div>
+        
       </section>
       </div>
 
