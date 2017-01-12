@@ -129,7 +129,7 @@ export default class CustomSwipeableview extends Component {
          onChangeIndex={this.handleTab}
        >
          <div className="view1">
-           <table className="Table" cellpadding="10">
+           <table className="Table" cellPadding="10">
               <tbody>
                 <tr>
                   <th>Date</th>
