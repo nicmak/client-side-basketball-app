@@ -52,7 +52,7 @@ componentDidMount() {
 	    const actions = [
 	      <FlatButton
 	        className="cancel-button"
-	        label="Cancel"
+	        label="Close"
 	        onClick = {this.props.handlerForStats}
 	      />
 	      ]

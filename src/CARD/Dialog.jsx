@@ -38,7 +38,7 @@ export default class OneDialog extends Component {
 
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Close"
         onClick = {this.props.handler}
         style={{color:'black'}}
       />,
