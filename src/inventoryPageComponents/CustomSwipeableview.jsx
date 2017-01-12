@@ -3,6 +3,8 @@ import {Tabs,Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import Time from 'react-time';
 import '../../styles/card.css';
+import '../../styles/CustomSwipeableview.css';
+
 
 
 const stationComponents = (playerStats = []) => {
@@ -105,23 +107,28 @@ export default class CustomSwipeableview extends Component {
     return (
 			<div>
        <Tabs
+         className="CustomPageTabs"
          onChange={this.handleTab}
          value={this.state.slideIndex}
+         inkBarStyle={{background:'red'}}
        >
          <Tab
+           className="Tab1"
            label="Statistics"
            value={0}
          />
          <Tab
+           className="Tab2"
            label="Profile"
            value={1}
           />
        </Tabs>
        <SwipeableViews
+         className="CustomSwipeableview"
          index={this.state.slideIndex}
          onChangeIndex={this.handleTab}
        >
-         <div>
+         <div className="view1">
            <table className="Table" cellpadding="10">
               <tbody>
                 <tr>

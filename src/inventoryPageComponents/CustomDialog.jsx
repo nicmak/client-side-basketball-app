@@ -24,8 +24,10 @@ export default class CustomDialog extends Component {
 	      autoScrollBodyContent={true}
 	      actions={actions}
 	      open={this.props.handlerValue}
+	      modal={false}
 	    >
 	    <CustomSwipeableview
+	      className="CustomSwipeableview"
         player={player}
         playerStats={this.props.playerStats}
 	    />
