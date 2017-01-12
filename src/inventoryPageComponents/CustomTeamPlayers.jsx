@@ -41,10 +41,11 @@ export default class CustomTeamPlayers extends Component {
   	console.log(this.props.customTeamID)
 		return (
 			<div>
-      <GridList
+      <GridList 
+         className="GridList"
          cellHeight={380}
          style={styles.gridList}
-         cols={1}
+         cols={3}
          style={{
           height: "790px",
           overflowY: 'auto',
@@ -53,7 +54,7 @@ export default class CustomTeamPlayers extends Component {
 			{
 				this.props.playerArray ?
 	      this.props.playerArray.map((player, index) => (
-          <GridTile
+          <GridTile 
           >
             <div
                key={index}

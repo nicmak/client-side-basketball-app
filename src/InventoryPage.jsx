@@ -9,6 +9,10 @@ import {Tabs,Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import '../styles/InventoryPage.css';
 import {Link} from 'react-router';
+import jwtDecode from'jwt-decode';
+  import ReactDriveIn from "react-drive-in";
+
+
 
 export default class InventoryPage extends Component {
 	constructor(props) {
@@ -24,6 +28,14 @@ export default class InventoryPage extends Component {
       customTeams: []
     };
 	}
+
+  loadUser = () => {
+    let token = sessionStorage.getItem('token');
+    let decoded = jwtDecode(token)
+      console.log('decoded',decoded)
+      console.log(decoded.email)
+      this.setState({currentUser:decoded.email})
+  }
 
 	getCustomTeams = () => {
     
@@ -166,24 +178,34 @@ export default class InventoryPage extends Component {
     }
   componentDidMount() {
 		this.getCustomTeams()	  
+    this.loadUser()
 	}
   render() {
     return (
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>	
+    
     	<section className="container">
-	       <FlatButton
-           label="Home"
-           href="/"
-           
-          />        
-        <div className="CustomTeamMenu">
+	      <div className="Nav">
+          <div className="Team-Nav">
+           <FlatButton
+             label="Home"
+             href="/"
+           />
+          </div> 
+          <div className="Title">My Teams</div> 
+        </div>      
+         <div className="CustomTeamMenu">
+         {
+          this.state.customTeams.length > 0 ?
           <CustomTeamMenu 
             selectCustomTeam={this.selectCustomTeam}
             customTeams={this.state.customTeams}
             deleteCustomTeam={this.deleteCustomTeam}
           />
-        </div>
-        <div className="Body">
+          :null
+         }
+         </div>
+         <div className="Body">
             <CustomTeamPlayers
               playerArray={this.state.playerArray}
               playerStatsArray={this.state.playerStatsArray}
@@ -194,9 +216,18 @@ export default class InventoryPage extends Component {
               deleteCustomTeamPlayer={this.deleteCustomTeamPlayer}
               customTeamID={this.state.customTeamID}
             />
-        </div>
-        <div className="Footer"></div>
-      </section>
+         </div>
+         <footer
+          className="BottomBar"
+         >
+          {
+            sessionStorage.getItem('token')?
+            <div className="userName">Welcome: {this.state.currentUser}</div>
+            :null
+          }
+          
+         </footer>      
+        </section>
     </MuiThemeProvider>
 
     )
