@@ -65,7 +65,9 @@ export default class OneCard extends Component {
 
     return (
       <div>
-        <Card>
+        <Card
+          containerStyle={{color:"white"}}
+        >
           <img role="presentation" src={player.head_shot}/>
           <CardMedia className ="cardmedia2"
             overlay={

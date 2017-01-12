@@ -26,7 +26,10 @@ html, body, #root, .container {
 
 .CustomTeamMenu {
 	background: #111;
+	width: 172px;
 }
 
-
+.playerText {
+	color:white;
+}
 
