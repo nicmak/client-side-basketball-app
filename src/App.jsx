@@ -30,6 +30,16 @@ class App extends Component {
     };
   }
 //--------------------------------------------------------------------
+  
+  loadUser = () => {
+    let token = sessionStorage.getItem('token');
+    let decoded = jwtDecode(token)
+      console.log('decoded',decoded)
+      console.log(decoded.email)
+      this.setState({currentUser:decoded.email})
+  }
+
+
   getTeams = () => {
     fetch(`http://www.localhost:3000/teams`)
       .then((response) => {
@@ -222,6 +232,7 @@ registerUser = (email, password) => {
       console.log("responsejson",responseJson)
       sessionStorage.setItem('token',responseJson.token);
       console.log("Stored in SessionStorage");
+      this.loadUser();
     })
     .catch((err) => {
       this.setState({RegisterError:"Email already exists"})
@@ -263,6 +274,8 @@ loginUser = (email,password) => {
     .then((responseJson) => {
       console.log("responsejson",responseJson)
       sessionStorage.setItem('token',responseJson.token);
+      this.loadUser();
+
       console.log("Stored");
     })
     .catch((err) => {
@@ -315,11 +328,8 @@ logoutUser = () => {
   componentDidMount() {
     this.getTeams()
     this.getCustomTeams()
-    let token = sessionStorage.getItem('token');
-    let decoded = jwtDecode(token)
-      console.log('decoded',decoded)
-      console.log(decoded.email)
-      this.setState({currentUser:decoded.email})
+    this.loadUser()
+    
   }
 //--------------------------------------------------------------------
 
