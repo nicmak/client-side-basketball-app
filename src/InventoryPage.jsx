@@ -171,9 +171,11 @@ export default class InventoryPage extends Component {
     return (
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>	
     	<section className="container">
-        <div className="Navbar">
-	        <Link to='/'>Home</Link>
-        </div>
+	       <FlatButton
+           label="Home"
+           href="/"
+           
+          />        
         <div className="CustomTeamMenu">
           <CustomTeamMenu 
             selectCustomTeam={this.selectCustomTeam}
