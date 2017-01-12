@@ -41,7 +41,7 @@ class Navbar extends Component {
         }
         <div className="Customize">
           <FlatButton 
-            label="Customize"
+            label="My Teams"
             href="/Inventory"
           />
         </div>

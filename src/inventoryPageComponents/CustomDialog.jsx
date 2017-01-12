@@ -10,6 +10,43 @@ import '../../styles/CustomSwipeableview.css';
 
 
 export default class CustomDialog extends Component {
+	
+constructor(props) {
+	super(props);
+	  this.state = {
+	  	teams:[]
+	  }
+}
+
+getTeams = () => {
+    fetch(`http://www.localhost:3000/teams`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((teams) => {
+        console.log(`this are all the teams`, teams)
+        this.setState({teams})
+      })
+  }
+
+checkTeams = () => {
+    const teams = this.state.teams
+    let name = ""
+    teams.map((team) => {
+      if (team.id === this.props.player.team_id) {
+        name = team.name
+      }
+    })
+    return name
+  }
+
+
+
+
+componentDidMount() {
+	this.getTeams()
+}
+
 	render () {
 	    const player = this.props.player
 	    const actions = [
@@ -24,7 +61,7 @@ export default class CustomDialog extends Component {
 	  
 	    <Dialog
 	      className="dialog-view"
-	      title="Statistics"
+	      title={`${this.props.player.first_name} ${this.props.player.last_name} - ${this.checkTeams()}`}
 	      autoScrollBodyContent={true}
 	      actions={actions}
 	      open={this.props.handlerValue}
