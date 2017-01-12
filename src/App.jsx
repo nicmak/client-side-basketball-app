@@ -390,7 +390,7 @@ logoutUser = () => {
         >
           {
             sessionStorage.getItem('token')?
-            <div className="userName">Welcome: {this.state.currentUser}</div>
+            <div className="userName">Welcome {this.state.currentUser}</div>
             :null
           }
           
