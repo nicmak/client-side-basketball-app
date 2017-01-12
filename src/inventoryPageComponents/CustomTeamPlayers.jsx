@@ -11,6 +11,7 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
+
 const styles = {
   root: {
     display: 'flex',
@@ -38,7 +39,16 @@ export default class CustomTeamPlayers extends Component {
     this.setState({handlerValue : !this.state.handlerValue})
   }
   
-  // numberOfPlayersofCol
+  setCol = (numberOfPlayers) => {
+    if (numberOfPlayers.length >=5) {
+      return 3
+    } 
+    else {
+      return 1
+    }
+  }
+
+ 
  
 
 
@@ -51,7 +61,7 @@ export default class CustomTeamPlayers extends Component {
          cellHeight={380}
          style={styles.gridList}
 
-         cols={1}
+         cols={this.setCol(this.props.playerArray)}
          style={{
           height: "790px",
           overflowY: 'auto',

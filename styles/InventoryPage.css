@@ -56,6 +56,10 @@ html, body, #root, .container {
   margin-left:50px !important;
 }
 
+.GridList > div {
+  width:500px !important;
+}
+
 .BottomBar {
   position: absolute;
   width: 100%;
