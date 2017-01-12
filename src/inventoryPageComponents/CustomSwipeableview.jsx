@@ -11,53 +11,70 @@ const stationComponents = (playerStats = []) => {
   })
   return playerStats.map((game)=> {
     let date = Date.parse(game.date)
+    let result = 'L'
+    if(game.home_score > game.away_score) {
+        if (game.home_internal_id === game.team_id) {result = 'W'}
+      } else if (game.away_internal_id === game.team_id) {result = 'W'}
+
     if (game.FGA) {
+      let fgPrct = 'n/a'
+      let ftPrct = 'n/a'
+      let fg3Prct = 'n/a'
+      let result = 'L'
+      if(game.FTA !== 0) {ftPrct = (game.FTM/game.FTA).toFixed(2)}
+      if(game.FGA !== 0) {fgPrct = (game.FGM/game.FGA).toFixed(2)}
+      if(game.FG3A !== 0) {fg3Prct = (game.FG3M/game.FG3A).toFixed(2)}
+
       return (
         <tr>
+          <td><Time value={date} format="MM/DD"/></td>
           <td>{game.home_nba_code} @ {game.away_nba_code}</td>
           <td>{game.home_score} @ {game.away_score}</td>
-          <td><Time value={date} format="MM/DD"/></td>
-          <td>{game.AST}</td>
-          <td>{game.BLK}</td>
-          <td>{game.DREB}</td>
-          <td>{game.FG3A}</td>
-          <td>{game.FG3M}</td>
-          <td>{game.FGA}</td>
-          <td>{game.FGM}</td>
-          <td>{game.FTA}</td>
-          <td>{game.FTM}</td>
-          <td>{game.OREB}</td>
-          <td>{game.PF}</td>
+          <td>{result}</td>
+          <td>{game.FGM}/{game.FGA}</td>
+          <td>{fgPrct}</td>
+          <td>{game.FTM}/{game.FTA}</td>
+          <td>{ftPrct}</td>
+          <td>{game.FG3M}/{game.FG3A}</td>
+          <td>{fg3Prct}</td>
           <td>{game.PTS}</td>
+          <td>{game.AST}</td>
+          <td>{game.OREB}</td>
+          <td>{game.DREB}</td>
+          <td>{ game.DREB + game.OREB }</td>
+          <td>{game.BLK}</td>
           <td>{game.STL}</td>
           <td>{game.TOV}</td>
+          <td>{game.PF}</td>
         </tr>
       )
     }
     else {
       return (
         <tr>
+          <td><Time value={date} format="MM/DD"/></td>
           <td>{game.home_nba_code} @ {game.away_nba_code}</td>
           <td>{game.home_score} @ {game.away_score}</td>
-          <td><Time value={date} format="MM/DD"/></td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
+          <td>{result}</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
         </tr>
       )
     }
-    
+
   });
 }
 

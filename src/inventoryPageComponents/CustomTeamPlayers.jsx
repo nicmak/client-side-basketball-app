@@ -7,6 +7,9 @@ import SwipeableViews from 'react-swipeable-views';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import CustomDialog from './CustomDialog.jsx'
 import {GridList, GridTile} from 'material-ui/GridList';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   root: {
@@ -25,7 +28,8 @@ export default class CustomTeamPlayers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      handlerValue : false
+      handlerValue : false,
+      MenuOpen: false
      
     }
   }
@@ -33,6 +37,7 @@ export default class CustomTeamPlayers extends Component {
   handlerForStats = () => {
     this.setState({handlerValue : !this.state.handlerValue})
   }
+  
 
  
 
@@ -56,24 +61,25 @@ export default class CustomTeamPlayers extends Component {
 	      this.props.playerArray.map((player, index) => (
           <GridTile 
           >
-            <div
+            <div className="playerContainer"
                key={index}
-              >
-                <img
+            >
+                <img className="face"
                   src={player.head_shot}
                 />
                 <div className="playerText">
-                  {
-                    `${player.first_name} ${player.last_name}
-                    Position: ${player.position}`
-                  } 
+                  {`${player.first_name} ${player.last_name}`}
+                  <br/>  
+                  {`${player.position}`}
+                </div>
+                <div className="options">
                   <FlatButton
-                  label="Statistics"
-                  onClick={() => {this.props.getPlayerBoxscores(player.id);this.handlerForStats()}}
+                    label="Statistics"
+                    onClick={() => {this.props.getPlayerBoxscores(player.id);this.handlerForStats()}}
                   />
                   <FlatButton
-                  label="Remove"
-                  onClick={() => {this.props.deleteCustomTeamPlayer(this.props.customTeamID,player.id)}}
+                    label="Remove"
+                    onClick={() => {this.props.deleteCustomTeamPlayer(this.props.customTeamID,player.id)}}
                   />
                 </div>
                 <CustomDialog
