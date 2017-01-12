@@ -38,7 +38,7 @@ export default class CustomTeamPlayers extends Component {
     this.setState({handlerValue : !this.state.handlerValue})
   }
   
-
+  // numberOfPlayersofCol
  
 
 
@@ -50,6 +50,7 @@ export default class CustomTeamPlayers extends Component {
          className="GridList"
          cellHeight={380}
          style={styles.gridList}
+
          cols={1}
          style={{
           height: "790px",
