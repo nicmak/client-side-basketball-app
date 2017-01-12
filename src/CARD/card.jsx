@@ -79,7 +79,10 @@ export default class OneCard extends Component {
             onClick={(event) => {this.handlerForPopover()}}
             label="ADD"
             className="FlatButton"
-
+          />
+          <FlatButton
+            onClick={(event) => {this.handler(); this.props.getPlayerBoxscores(player.id);}}
+            label="Statistics"
           />
           <Popover
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -99,10 +102,7 @@ export default class OneCard extends Component {
           </Popover>
 
 
-          <FlatButton
-            onClick={(event) => {this.handler(); this.props.getPlayerBoxscores(player.id);}}
-            label="Statistics"
-          />
+          
           </div>
 
           <OneDialog
