@@ -35,7 +35,7 @@ export default class OneDialog extends Component {
   render() {
     const player = this.props.player
     const key = this.props.key
-    
+
     const actions = [
       <FlatButton
         label="Cancel"
