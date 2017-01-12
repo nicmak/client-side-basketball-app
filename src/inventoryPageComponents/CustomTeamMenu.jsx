@@ -15,7 +15,7 @@ const MenuItems = (customTeams = [] , cb, cb2) => {
           primaryText={customTeam.name}
           menuItems={[
             <MenuItem className="MenuItem"
-              primaryText = {"Show" + customTeam.name}
+              primaryText = {"Show " + customTeam.name}
               onClick = {() => { cb(customTeam.name)}}
             />,
             <MenuItem className="MenuItem"
