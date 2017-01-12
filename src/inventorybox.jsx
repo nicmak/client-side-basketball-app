@@ -86,6 +86,7 @@ export default class InventoryBox extends React.Component {
               selectedPlayers={this.props.selectedPlayers}
               deletePlayer={this.props.deletePlayer}
               handleTeamName={this.handleTeamName}
+              emptyName={this.props.emptyName}
             />   
          
         </Drawer>

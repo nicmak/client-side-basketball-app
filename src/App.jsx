@@ -191,6 +191,10 @@ class App extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson)
+      this.setState({
+        selectedPlayers: []
+      })
+      
     });
 
    }

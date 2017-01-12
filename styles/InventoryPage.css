@@ -44,12 +44,10 @@ html, body, #root, .container {
   font-size: 30px;
   text-transform: uppercase;
   text-shadow: 6px 4px 6px brown;
+
 }
 .Body{
   padding: 29px;
-  position: absolute;
-    bottom: 200px;
-    left: 200px;
 }
 .GridList {
   margin-left:50px !important;
