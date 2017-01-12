@@ -15,15 +15,17 @@ const stationComponents = (playerStats = []) => {
   return playerStats.map((game)=> {
     let date = Date.parse(game.date)
     let result = 'L'
-    if(game.home_score > game.away_score) {
-        if (game.home_internal_id === game.team_id) {result = 'W'}
-      } else if (game.away_internal_id === game.team_id) {result = 'W'}
+    if (game.home_score > game.away_score && game.home_internal_id === game.team_id) {
+        result = 'W'
+    }
+    if (game.away_score > game.home_score && game.away_internal_id === game.team_id) {
+      result = 'W'
+    }
 
     if (game.FGA) {
       let fgPrct = 'n/a'
       let ftPrct = 'n/a'
       let fg3Prct = 'n/a'
-      let result = 'L'
       if(game.FTA !== 0) {ftPrct = (game.FTM/game.FTA).toFixed(2)}
       if(game.FGA !== 0) {fgPrct = (game.FGM/game.FGA).toFixed(2)}
       if(game.FG3A !== 0) {fg3Prct = (game.FG3M/game.FG3A).toFixed(2)}
@@ -34,6 +36,7 @@ const stationComponents = (playerStats = []) => {
           <td>{game.home_nba_code} @ {game.away_nba_code}</td>
           <td>{game.home_score} @ {game.away_score}</td>
           <td>{result}</td>
+          <td>{game.MIN}</td>
           <td>{game.FGM}/{game.FGA}</td>
           <td>{fgPrct}</td>
           <td>{game.FTM}/{game.FTA}</td>
@@ -59,6 +62,7 @@ const stationComponents = (playerStats = []) => {
           <td>{game.home_nba_code} @ {game.away_nba_code}</td>
           <td>{game.home_score} @ {game.away_score}</td>
           <td>{result}</td>
+          <td>-</td>
           <td>-</td>
           <td>-</td>
           <td>-</td>
@@ -130,13 +134,14 @@ export default class OneSwipeableView extends Component {
             </div>
           </div>
           <div className="Stats">
-            <table className="Table" cellpadding="10">
+            <table className="Table" cellPadding="10">
               <tbody>
                 <tr>
                   <th>Date</th>
                   <th>Game</th>
                   <th>Final Score</th>
                   <th>W/L</th>
+                  <th>MIN</th>
                   <th>FGM/FGA</th>
                   <th>FG%</th>
                   <th>FTM/FTA</th>
