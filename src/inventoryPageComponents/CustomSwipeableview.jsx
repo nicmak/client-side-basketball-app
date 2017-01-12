@@ -105,7 +105,7 @@ export default class CustomSwipeableview extends Component {
   const player = this.props.player
 		
     return (
-			<div>
+			<div className="swipeview">
        <Tabs
          className="CustomPageTabs"
          onChange={this.handleTab}
@@ -132,23 +132,26 @@ export default class CustomSwipeableview extends Component {
            <table className="Table" cellpadding="10">
               <tbody>
                 <tr>
-                  <th>Game</th>
-                  <th>Score</th>
                   <th>Date</th>
-                  <th>AST</th>
-                  <th>BLK</th>
-                  <th>DREB</th>
-                  <th>FG3A</th>
-                  <th>FG3M</th>
-                  <th>FGA</th>
-                  <th>FGM</th>
-                  <th>FTA</th>
-                  <th>FTM</th>
-                  <th>OREB</th>
-                  <th>PF</th>
+                  <th>Game</th>
+                  <th>Final Score</th>
+                  <th>W/L</th>
+                  <th>MIN</th>
+                  <th>FGM/FGA</th>
+                  <th>FG%</th>
+                  <th>FTM/FTA</th>
+                  <th>FT%</th>
+                  <th>3PTM/3PTA</th>
+                  <th>3PT%</th>
                   <th>PTS</th>
+                  <th>AST</th>
+                  <th>OREB</th>
+                  <th>DREB</th>
+                  <th>TREB</th>
+                  <th>BLK</th>
                   <th>STL</th>
                   <th>TOV</th>
+                  <th>PF</th>
                 </tr>
                   {
                     stationComponents(this.props.playerStats)

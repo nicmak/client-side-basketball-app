@@ -22,3 +22,20 @@ h3 {
 .CustomSwipeableview {
 	background-color: brown !important
 }
+.CustomSwipeableview > div > div  {
+  background: white !important
+}
+
+
+.dialog-view > div > div > div > div {
+  background: white !important;
+}
+
+.Table {
+	color: black !important;
+}
+
+.cancel-button {
+	color: black !important;
+	background: brown !important;
+}

@@ -57,7 +57,7 @@ export default class OneDialog extends Component {
         modal={false}
         actions={actions}
         open={this.props.opener}
-        contentStyle={{width:'100%'}}
+        contentStyle={{width: '100%', maxWidth:'none'}}
       >
         <OneSwipeableView
           player={this.props.player}

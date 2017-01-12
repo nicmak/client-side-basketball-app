@@ -30,14 +30,14 @@
   height:30px;
 }
 
-div.cardmedia2 > div > div > div  {
+/*div.cardmedia2 > div > div > div  {
   opacity:0;
 
-}
-div.cardmedia2 > div > div > div:hover  {
+}*/
+div.cardmedia2 > div > div > div  {
   opacity:1;
-  transition: opacity 0.5s;
-  bottom:2px !important;
+  bottom:3px !important;
+  height:55px !important;
 }
 
 div.cardmedia > div > div > div  {
@@ -141,9 +141,10 @@ div.cardmedia > div > button {
   }
 
   .Table {
-    padding: 10px 5px;
+    /*padding: 10px 5px;
     border-spacing: 8px 6px;
-    margin-top:18px;
+    margin-top:18px;*/
+    margin-left: 2px !important;
   }
 
   .Table, th, td {
@@ -151,8 +152,8 @@ div.cardmedia > div > button {
     border-collapse: collapse;
   }
   .Table, td {
-    padding-right: 28px;
-    padding-left: 20px;
+    /*padding-right: 28px;
+    padding-left: 20px;*/
   }
 
 
