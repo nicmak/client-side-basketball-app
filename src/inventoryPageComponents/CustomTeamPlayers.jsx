@@ -50,7 +50,7 @@ export default class CustomTeamPlayers extends Component {
          className="GridList"
          cellHeight={380}
          style={styles.gridList}
-         cols={3}
+         cols={1}
          style={{
           height: "790px",
           overflowY: 'auto',
@@ -63,10 +63,12 @@ export default class CustomTeamPlayers extends Component {
           >
             <div className="playerContainer"
                key={index}
-            >
-                <img className="face"
-                  src={player.head_shot}
-                />
+            >   
+                <div className="face">
+                  <img 
+                    src={player.head_shot}
+                  />
+                </div>
                 <div className="playerText">
                   {`${player.first_name} ${player.last_name}`}
                   <br/>  

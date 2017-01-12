@@ -205,7 +205,7 @@ export default class InventoryPage extends Component {
           :null
          }
          </div>
-         <div className="Body">
+         <div className="Container-gridtiles">
             <CustomTeamPlayers
               playerArray={this.state.playerArray}
               playerStatsArray={this.state.playerStatsArray}
