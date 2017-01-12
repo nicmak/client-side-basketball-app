@@ -43,15 +43,19 @@ export default class OneList extends Component {
                 />
                 <div className="title">
                   {
-                    `Name: ${player.first_name} ${player.last_name}
-                    Position: ${player.position}`
+                    `${player.first_name} ${player.last_name}`
+                    }<br/>
+                    {`${player.position}`
                   } 
-                </div>
-              </Paper>
-              <FlatButton
+
+                  <FlatButton
                 label="Delete"
+                // style={{float:'right'}}
                 onClick={() =>{this.props.deletePlayer(player)}}
               />
+                </div>
+              </Paper>
+
              </ListItem>
             ))}
           </List>
