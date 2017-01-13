@@ -85,7 +85,7 @@ const stationComponents = (playerStats = []) => {
 }
 
 export default class CustomSwipeableview extends Component {
-	
+
 	constructor(props) {
     super(props);
     this.state = {
@@ -103,7 +103,7 @@ export default class CustomSwipeableview extends Component {
 
   render() {
   const player = this.props.player
-		
+
     return (
 			<div className="swipeview">
        <Tabs
@@ -165,14 +165,14 @@ export default class CustomSwipeableview extends Component {
                 Name: {`${player.first_name} ${player.last_name}`}<br/><br/>
                 Position: {player.position}<br/><br/>
                 College: {player.college}<br/><br/>
-                Height: {player.height} (FT- INCH)<br/><br/> 
+                Height: {player.height} (FT- INCH)<br/><br/>
                 Weight: {player.weight} LBS
               </div>
           </div>
 
        </SwipeableViews>
       </div>
-     
+
 
 		)
 	}
